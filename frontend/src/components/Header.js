@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Container} from 'react-bootstrap';
+import { Navbar, Nav, Container, NavDropdown} from 'react-bootstrap';
 import './Header.css';
 
 function Header() {
@@ -8,16 +8,21 @@ function Header() {
       
             
 
-            <Navbar className = "navbar" expand="lg">
+            <Navbar className = "bg-dark-blue" expand="lg">
 
                 <Container>
-                    <Navbar.Brand className = "navBrand" href="#home">Golazo</Navbar.Brand>
+
+                    <Navbar.Brand className = "navBrand fs-2 text-white" href="/">Golazo</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
                     <Navbar.Collapse id="basic-navbar-nav">
 
-                        <Nav fill  variant = "tabs" className="me-auto">
-                            <Nav.Link className = "navItem" href="#home">Home</Nav.Link>
-                            <Nav.Link className = "navItem" href="#link">Link</Nav.Link>
+                        <Nav className="w-100 nav-justified" variant = "tabs">
+                            <Nav.Link className = "navItem fs-3 text-white" href="/live">Live Scores</Nav.Link>
+
+                            <Nav.Link className = "navItem text-white fs-3 " href="/standings">League Standings</Nav.Link>
+
+                            <Nav.Link className = "navItem text-white fs-3 " href="/scorers">Top Scorers</Nav.Link>
 
                         </Nav>
                     </Navbar.Collapse>
