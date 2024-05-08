@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 require('dotenv').config();
 
 //mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -13,6 +13,11 @@ var path = require('path');
 var app = express();
 
 app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+const scoresRoute = require('./routes/scores'); 
+
+app.use('/scoreboard', scoresRoute);
+
 
 app.get("*", function(req, res){
   res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
