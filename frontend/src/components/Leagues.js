@@ -5,20 +5,14 @@ function Leagues() {
   return (
     <div className="Home">
       
-    
+	    <Container className = "mt-5">
 
-      <Container className = "w-100 h-100 title">
+            <p className  = "text-white h3 p-3"> League: </p>
 
+                <iframe src = "/standings.html" width = "100%" height = "1000px" title = "Live Scores" allowtransparency = "true" allow = "encrypted-media"></iframe>
 
-
-
-        <h1 className = "text-center text-white">Leagues Standings </h1>
+        </Container>
         
-
-      </Container>
-
-
-
     </div>
   );
 }

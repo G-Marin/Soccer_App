@@ -5,7 +5,7 @@ import Home from './Home';
 import Footer from './Footer';
 import Scores from './Scores'; 
 import Leagues from './Leagues'; 
-import Livescores from './Livescore'; 
+import Scoreboard from './Livescore'; 
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/scorers" element={<Scores />} />
         <Route path="/standings" element={<Leagues />} />
-        <Route path="/live" element={<Livescores />} />
+        <Route path="/live" element={<Scoreboard />} />
       </Routes>
       <Footer />
     </BrowserRouter>
