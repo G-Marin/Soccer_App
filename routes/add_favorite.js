@@ -1,0 +1,1 @@
+import { addFavorite } from "../database";
