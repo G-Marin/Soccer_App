@@ -1,1 +1,0 @@
-import { removeFavorite } from "../database";

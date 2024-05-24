@@ -1,16 +1,86 @@
+import "./Livescore.css";
 import React, { useEffect } from 'react';
-import { useRef } from 'react';
-import {Container } from 'react-bootstrap';
+import { Dropdown, Container, FormControl } from 'react-bootstrap';
+import { useState } from 'react';
 
 const Scoreboard = () => {
+
+	useEffect(() => { 
+		const script = document.createElement('script');
+		script.src = 'https://widgets.api-sports.io/2.0.3/widgets.js';
+		script.type = 'module';
+		document.body.appendChild(script);
+		return () => {
+			document.body.removeChild(script);
+		};
+	}, []);
+
+	const [searchQuery, setSearchQuery] = React.useState('');
+	const [leagues, setLeagues] = React.useState([
+
+	'Premier League',
+	'La Liga',
+	'Serie A',
+	'Bundesliga',
+	'Ligue 1',
+	'UEFA Champions League',
+	'UEFA Europa League',
+	'UEFA Conference League',
+	'Eredivisie',
+	'Primeira Liga',
+	'Brasileirao Serie A',
+	'Argentine Primera Division',
+	'Super Lig',
+	'MLS',
+	'First Division A',
+	'Liga MX',
+	'Championship',
+	'J1 League',
+	'Superleague',
+	'Eliteserien',
+	]);
+
+	const handleSearch = (e) => {
+		setSearchQuery(e.target.value);
+	};
+
+	const filteredLeagues = leagues.filter((league) => 
+		league.toLowerCase().includes(searchQuery.toLowerCase())
+	);
 
 	return (
 
 		<Container className = "mt-5">
 
-		<p className  = "text-white h3 p-3"> League: </p>
+		<iframe src = "/scoreboard.html" className = "w-100 scores"></iframe>
 
-		<iframe src = "/scoreboard.html"></iframe>
+		<Dropdown className = "w-100"> 
+
+			<Dropdown.Toggle variant="secondary" id="dropdown-basic" className = "w-100 btn-sm">
+
+			Select League
+
+			</Dropdown.Toggle>
+
+			<Dropdown.Menu className = "w-100 p-2">
+
+				<FormControl 
+				autoFocus
+				className = "mb-2"
+				placeholder = "Search for a league"
+				onChange = {handleSearch}
+				value = {searchQuery}
+				/>
+
+				{filteredLeagues.map((league, index) => (
+                	<Dropdown.Item key={index}>{league}</Dropdown.Item>
+                ))}
+			
+			</Dropdown.Menu>
+
+		</Dropdown>
+
+		
 
 		</Container>
 	)
@@ -79,3 +149,4 @@ const Scoreboard = () => {
 //   )	;
 
 export default Scoreboard;
+

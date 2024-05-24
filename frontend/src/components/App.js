@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './Header';
-import Home from './Home';
-import Footer from './Footer';
-import Scores from './Scores'; 
-import Leagues from './Leagues'; 
-import Scoreboard from './Livescore'; 
+import Header from './Header.js';
+import Home from './Home.js';
+import Footer from './Footer.js';
+import Scores from './Scores.js'; 
+import Leagues from './Leagues.js'; 
+import Scoreboard from './Livescore.js'; 
+import Login from './Login.js';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/scorers" element={<Scores />} />
         <Route path="/standings" element={<Leagues />} />
         <Route path="/live" element={<Scoreboard />} />
+        <Route path="/login" element = {<Login />} />
       </Routes>
       <Footer />
     </BrowserRouter>

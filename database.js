@@ -1,38 +1,60 @@
-function createUser(tableName, data) {
-    const keys = Object.keys(data);
-    const values = Object.values(data);
+import { pool } from './connection.js';
 
-    const sql = `INSERT INTO ${tableName} (${keys.join(', ')}) VALUES (${values.map(value => `'${value}'`).join(', ')})`;
+// Add a user to the database
+async function addUserDB(query, user_data) {
+    try{
+        const result = await pool.query(query, user_data);
+        return result.rows[0];
+    }
 
-    return sql;
+    catch (error) {
+        console.error('Error adding user:', error);
+        throw new Error('Error adding user');
+      }
 }
 
-function updateUser(tableName, data) {
-    const keys = Object.keys(data);
-    const values = Object.values(data);
+// Add favorite for user to the database
+async function addFavoriteDB(query, data) {
+    try{
+        const result = await pool.query(query, data);
+        return result.rows[0];
+    }
+    catch (error) {
+        console.error('Error adding user:', error);
+        throw new Error('Error adding user');
+      }
 
-    const sql = `INSERT INTO ${tableName} (${keys.join(', ')}) VALUES (${values.map(value => `'${value}'`).join(', ')})`;
 
-    return sql;
 }
 
-function addFavorite(tableName, data) {
-    const keys = Object.keys(data);
-    const values = Object.values(data);
+// Remove favorite for user from the database
+async function removeFavoriteDB(query, data) {
 
-    const sql = `INSERT INTO ${tableName} (${keys.join(', ')}) VALUES (${values.map(value => `'${value}'`).join(', ')})`;
+    try{
 
-    return sql;
+        console.log("Data: ", data)
+        const result = await pool.query(query, data);
+        console.log("Result: ", result)
+        return result.rows[0];
+    }
+    catch (error) {
+        console.error('Error adding user:', error);
+        throw new Error('Error adding user');
+      }
+
 }
 
-function removeFavorite(tableName, data) {
-    const keys = Object.keys(data);
-    const values = Object.values(data);
+// Get favorite for user from the database
+async function getFavoriteDB(query, data) {
+    try{
+        const result = await pool.query(query, data);
+        return result.rows[0];
+    }
+    catch (error) {
+        console.error('Error adding user:', error);
+        throw new Error('Error adding user');
+      }
 
-    const sql = `INSERT INTO ${tableName} (${keys.join(', ')}) VALUES (${values.map(value => `'${value}'`).join(', ')})`;
-
-    return sql;
 }
 
-
-export { createUser, updateUser, addFavorite, removeFavorite };
+export { addUserDB, addFavoriteDB, removeFavoriteDB, getFavoriteDB} 

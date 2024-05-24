@@ -1,1 +1,0 @@
-import addUser from '../controllers/add_user';
