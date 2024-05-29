@@ -1,3 +1,63 @@
-.standings{
-    height:550px;
+.standings-box{
+    background-color: rgb(191, 203, 255);
+    height: 1000px;
+    border-radius: 5px;
+    position:relative;
+    margin-bottom:1%;
+}
+
+.header-box{
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    height: 10%;
+    width: 100%;
+    top:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(191, 203, 255);
+}
+
+.league-logo img{
+    width: 30%;
+    height: 100%;
+    padding:5px; 
+}
+
+.league-logo{
+    width: 20%;
+    border-radius: 10px;
+    border-width: 3px;
+    border-style: solid;
+    border-color:rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+}
+
+.team-logo img{
+    width: 80%;
+    height: 100%; 
+}
+
+.labels{
+    background-color:rgba(250, 235, 215, 0.623);
+    color:rgb(0, 0, 0);
+    border-color:rgb(0, 0, 0);
+    border-style: solid;
+    border-width: 1px;
+
+}
+
+.entry{
+    background-color: rgba(175, 175, 175, 0.425);
+    border-color:rgb(0, 0, 0);
+    border-style: solid;
+    border-width: 1px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+#dropdown-basic{
+    height:60px;
 }

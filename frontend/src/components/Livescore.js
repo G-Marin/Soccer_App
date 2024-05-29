@@ -1,7 +1,7 @@
 import "./Livescore.css";
 import React, { useEffect } from 'react';
 import { Dropdown, Container, FormControl } from 'react-bootstrap';
-import { useState } from 'react';
+
 
 const Scoreboard = () => {
 
@@ -52,7 +52,36 @@ const Scoreboard = () => {
 
 		<Container className = "mt-5">
 
-		<iframe src = "/scoreboard.html" className = "w-100 scores"></iframe>
+
+			<div className = "fixtures-box">		
+
+				<div className = "league-title h1 text-center">
+					La Liga
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+		
 
 		<Dropdown className = "w-100"> 
 

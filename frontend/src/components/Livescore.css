@@ -1,5 +1,23 @@
-.scores{
+.fixtures-box{
+    background-color: rgb(255, 255, 255);
+    height: 1100px;
+    border-radius: 2%;
+}
 
-    height:1000px;
+.league-title{
+    padding-top:1%;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
 }
+
+.outerBox {
+    margin: auto;
+    width: 90%;
+    height: 900px;
+    background-color: #040285;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+  }
+  

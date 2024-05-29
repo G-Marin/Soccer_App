@@ -10,7 +10,7 @@ function Header() {
 
             <Navbar className = "bg-dark-blue" expand="lg">
 
-                <Container>
+                <Container fluid>
 
                     <Navbar.Brand className = "navBrand fs-2 text-white" href="/">Golazo</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />

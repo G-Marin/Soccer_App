@@ -1,5 +1,6 @@
 import { pool } from './connection.js';
 
+
 // Add a user to the database
 async function addUserDB(query, user_data) {
     try{
@@ -56,5 +57,8 @@ async function getFavoriteDB(query, data) {
       }
 
 }
+
+
+
 
 export { addUserDB, addFavoriteDB, removeFavoriteDB, getFavoriteDB} 

@@ -8,7 +8,7 @@ function Footer() {
     <div className="Footer">
       
 
-      <Container >
+      <Container>
 
       <a href = "https://www.linkedin.com/in/gabriel-marin-/" className = "text-center text-white footer mb-3">Made by Gabriel Marin </a>
       
