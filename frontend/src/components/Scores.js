@@ -85,30 +85,30 @@ function Scores() {
                                         <img src={scorer.player.photo} alt={scorer.player.name}></img>
                                     </div>
                                 </div>
-                                <div className="col-2">
-                                    <div className="text-black fw-bold h2">
+                                <div className="col-2 player-name">
+                                    <div className="text-black fw-bold ">
                                         {scorer.player.name}
                                     </div>
                                     <pre>
-                                        <div className="text-black h4 mt-4">Age: {scorer.player.age}</div>
-                                        <div className="text-black h4">Goals: {scorer.statistics[0].goals.total}</div>
-                                        <div className="text-black h4">Assists: {scorer.statistics[0].goals.assists}</div>
+                                        <div className="text-black mt-4">Age: {scorer.player.age}</div>
+                                        <div className="text-black ">Goals: {scorer.statistics[0].goals.total}</div>
+                                        <div className="text-black ">Assists: {scorer.statistics[0].goals.assists}</div>
                                     </pre>
                                 </div>
                                 <div className="col-2">
-                                    <div className="text-black fw-bold h2">Attributes</div>
+                                    <div className="text-black fw-bold ">Attributes</div>
                                     <pre>
-                                        <div className="text-black h4 mt-4">Position: {scorer.statistics[0].games.position}</div>
-                                        <div className="text-black h4">Height: {scorer.player.height}</div>
-                                        <div className="text-black h4">Weight: {scorer.player.weight}</div>
+                                        <div className="text-black  mt-4">Position: {scorer.statistics[0].games.position}</div>
+                                        <div className="text-black ">Height: {scorer.player.height}</div>
+                                        <div className="text-black ">Weight: {scorer.player.weight}</div>
                                     </pre>
                                 </div>
                                 <div className="col-2">
-                                    <div className="text-black fw-bold h2">Statistics</div>
+                                    <div className="text-black fw-bold ">Statistics</div>
                                     <pre>
-                                        <div className="text-black h4 mt-4">Appearances: {scorer.statistics[0].games.appearences}</div>
-                                        <div className="text-black h4">Minutes Played: {scorer.statistics[0].games.minutes}</div>
-                                        <div className="text-black h4">Nationality: {scorer.player.nationality}</div>
+                                        <div className="text-black  mt-4">Appearances: {scorer.statistics[0].games.appearences}</div>
+                                        <div className="text-black ">Minutes Played: {scorer.statistics[0].games.minutes}</div>
+                                        <div className="text-black ">Nationality: {scorer.player.nationality}</div>
                                     </pre>
                                 </div>
                                 <div className="col team">
