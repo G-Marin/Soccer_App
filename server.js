@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import userRouter from './routes/users.js';
 import favoriteRouter from './routes/favorite.js';
 import newsRouter from './routes/news.js';
+import cookieParser from 'cookie-parser';
 
 
 // Import other routers if needed
@@ -24,9 +25,7 @@ const app = express();
 
 app.use(express.json());
 
-
-// User routes
-console.log("Adding user routes");
+app.use(cookieParser());
 
 // Routes
 app.use('/user', userRouter);

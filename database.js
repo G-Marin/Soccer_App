@@ -14,6 +14,21 @@ async function addUserDB(query, user_data) {
       }
 }
 
+
+// Add a user to the database
+async function getUserDB(query, username) {
+
+    try{
+        const result = await pool.query(query, [username]);
+        console.log("Result: ", result.rows[0])
+        return result.rows[0];
+    }
+
+    catch (error) {
+        console.error('User not found:', error), false;
+      }
+}
+
 // Add favorite for user to the database
 async function addFavoriteDB(query, data) {
     try{
@@ -48,6 +63,9 @@ async function removeFavoriteDB(query, data) {
 // Get favorite for user from the database
 async function getFavoriteDB(query, data) {
     try{
+        console.log("Data: ", data)
+        console.log("Query: ", query)
+
         const result = await pool.query(query, data);
         return result.rows[0];
     }
@@ -61,4 +79,4 @@ async function getFavoriteDB(query, data) {
 
 
 
-export { addUserDB, addFavoriteDB, removeFavoriteDB, getFavoriteDB} 
+export { addUserDB, addFavoriteDB, removeFavoriteDB, getFavoriteDB, getUserDB} 

@@ -9,6 +9,7 @@ function Login() {
 	const [formData, setFormData] = React.useState({
 		username: '',
 		password: '',
+		email: '',
 	});
 
 
@@ -27,7 +28,7 @@ function Login() {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post('/user/login', formData, {
+			const response = await axios.post('/user/add', formData, {
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -76,14 +77,25 @@ function Login() {
 							onChange={handleChange}
 						/>
 					</div>
-					<button type="submit" className="btn 		btn-primary mt-3">Submit</button>
+          <div className="form-group">
+            <label htmlFor="email" className="text-white">Email:</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary mt-3">Submit</button> 
 				</form>
 
 				</div>
 
 
 			
-				<div className="text-white mb-5">Don't have an account? <a href="/register" className="text-white">Register</a></div>
+				<div className="text-white mb-5">Have an account? <a href="/login" className="text-white">Login</a></div>
 			
 			</div>
 			

@@ -1,6 +1,6 @@
 function addUserSQL() {
-    const sql = `INSERT INTO users ( user_id, username, password, email) VALUES (
-        $1::integer, $2::character varying, $3::character varying, $4::character varying)
+    const sql = `INSERT INTO users (username, password, email) VALUES (
+        $1::character varying, $2::character varying, $3::character varying)
          returning user_id; `
 
    return sql; 
@@ -15,6 +15,13 @@ function addFavoriteSQL() {
     return sql;
 }
 
+function getUserSQL() {
+
+    const sql = `SELECT password FROM users WHERE username = $1::character varying;`
+
+    return sql; 
+}
+
 function removeFavoriteSQL() {
     const sql = `DELETE FROM public.users_teams
     WHERE (user_id, team_id) IN
@@ -25,7 +32,7 @@ function removeFavoriteSQL() {
 
 function getFavoriteSQL () {
     
-    const sql = `SELECT * FROM public.users_teams WHERE user_id = $1::integer;`
+    const sql = `SELECT t.team_name FROM users u JOIN users_teams ut ON u.user_id = ut.user_id JOIN teams t ON ut.team_id = t.team_id WHERE u.username = $1::character varying;`
 
     return sql;
 }
@@ -34,15 +41,11 @@ function getFavoriteSQL () {
 
 function getNewsQuery (team) {
     
-    let query = "https://newsapi.org/v2/everything?q="
-
-    query += team
-
-    query += "&searchIn=title&sources=espn&sortBy=publishedAt&apiKey=205ce2358e0842109aa663110ed7166d"
+    let query = "https://newsapi.org/v2/everything";
 
     return query;
 }
 
 
 
-export { addUserSQL, addFavoriteSQL, removeFavoriteSQL, getFavoriteSQL, getNewsQuery};
+export { addUserSQL, addFavoriteSQL, removeFavoriteSQL, getFavoriteSQL, getNewsQuery, getUserSQL};

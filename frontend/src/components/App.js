@@ -7,6 +7,8 @@ import Scores from './Scores.js';
 import Leagues from './Leagues.js'; 
 import Scoreboard from './Livescore.js'; 
 import Login from './Login.js';
+import Register from './Register.js';
+import News from './News.js';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/standings" element={<Leagues />} />
         <Route path="/live" element={<Scoreboard />} />
         <Route path="/login" element = {<Login />} />
+        <Route path="/register" element = {<Register />} />
+        <Route path="/news" element={<News />} />
       </Routes>
       <Footer />
     </BrowserRouter>

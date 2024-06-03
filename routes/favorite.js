@@ -34,11 +34,11 @@ router.post('/add', async (req, res) => {
 
 router.get('/', async (req, res) => {
 
-    const userId = req.query.user_id;
+    const username = req.query.username;
     const query = getFavoriteSQL();
 
     try {
-        const result = await getFavoriteDB(query, [userId]);
+        const result = await getFavoriteDB(query, [username]);
         res.status(200).json(result);
     } catch(err) {
         res.status(500).json(err.message)

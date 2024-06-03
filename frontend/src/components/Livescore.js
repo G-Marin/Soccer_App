@@ -1,24 +1,17 @@
 import "./Livescore.css";
+import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { Dropdown, Container, FormControl,Button} from 'react-bootstrap';
+import { format } from 'date-fns';
 
 
 
 const Scoreboard = () => {
-
-	useEffect(() => { 
-		const script = document.createElement('script');
-		script.src = 'https://widgets.api-sports.io/2.0.3/widgets.js';
-		script.type = 'module';
-		document.body.appendChild(script);
-		return () => {
-			document.body.removeChild(script);
-		};
-	}, []);
-
+    
 	const [searchQuery, setSearchQuery] = useState('');
     const [selectedLeague, setSelectedLeague] = useState(140);
-	const [time, setTime] = React.useState('current');
+	const [time, setTime] = useState('past');
+    const [fixtures, setFixtures] = useState([]);
 
 	const leaguesList = [
         { id: 39, name: 'Premier League' },
@@ -42,6 +35,51 @@ const Scoreboard = () => {
         { id: 68, name: 'Superleague' },
         { id: 103, name: 'Eliteserien' }
     ];
+
+
+    useEffect(() => {
+
+     
+        const fetchFixtures = async (league, time) => {
+
+            let params = {
+                season: '2023',
+                league: league,
+            };    
+
+            if (time === 'current') {
+                const today = new Date();
+                params.date = format(today, 'yyyy-MM-dd');
+            } else if (time === 'scheduled') {
+                params.next = 20;
+            } else if (time === 'past') {
+                params.last = 20;
+            }
+
+            try {
+                const response = await axios.get('https://v3.football.api-sports.io/fixtures', {
+                    params: params,
+                    headers: {
+                        'x-rapidapi-host': 'v3.football.api-sports.io',
+                        'x-rapidapi-key':'6d1c1eae83a98e627d2fd7b059c9ef03',
+                    }
+                });
+                setFixtures(response.data.response);
+
+                for(let i = 0; i < response.data.response.length; i++) {
+                    console.log(response.data.response[i]);
+                }
+
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+
+        fetchFixtures(selectedLeague, time);
+    }, [selectedLeague, time]);
+
+
 	const handleSearch = (e) => {
         setSearchQuery(e.target.value);
     };
@@ -54,11 +92,11 @@ const Scoreboard = () => {
         league.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-	const changeTime = (e) => {
-		setTime(e.target.innerText);
-	}
+	const handleTime = (time) => {
+        setTime(time);
+    };
 
-	
+
 	return (
 
 		<Container className = "mt-5">
@@ -86,18 +124,16 @@ const Scoreboard = () => {
 
 			<div className = "time-buttons">
 
-			
-
-				<Button variant="primary" onClick={changeTime}>
+				<Button variant="primary" onClick={() => handleTime("current")}>
 					Current
 				</Button>
 
-				<Button variant="success" onClick={changeTime}>
+				<Button variant="success" onClick={() => handleTime("scheduled")}>
 					Scheduled
 				</Button>
 
 
-				<Button variant="dark" onClick={changeTime}>
+				<Button variant="dark" onClick={() => handleTime("past")}>
 					Past 
 				</Button>
 
@@ -113,43 +149,54 @@ const Scoreboard = () => {
                 </div>
                 
 				<div className="row p-3 fw-bold fixture-labels" align="center">
-                    <div className="col-2">Form</div>
-                    <div className="col-2">Home</div>
-                    <div className="col-2">Away</div>
-                    <div className="col-2">Form </div>
-					<div className="col-1">Time</div>
-					<div className="col-1">Date</div>
-					<div className="col-1">Stadium</div>
-					<div className="col-1">Referee</div>
-                 
+                    <div className="col-1">Home</div>
+                    <div className="col-1"></div>
+                    <div className="col-1"></div>
+					<div className="col-1">Away</div>
+					<div className="col-2">Date</div>
+					<div className="col-2">Stadium</div>
+					<div className="col-2">Referee</div>
+                    <div className = "col-1"> Status</div>
+                    <div className="col-1">Statistics</div>
                 </div>
 
-				<div className="row p-3 fw-bold fixture-labels" align = "center">
-                    <div className="col-2"> 
+                
+                {fixtures.map((match) => (
+                             
+                    <div key = {match.fixture.id} className="row p-3 fw-bold fixture-labels" align = "center">
+                    
+                        <div className="col-1">	
+					        <div className = "fixture-teams">
+                                <img src = {match.teams.home.logo}></img>
+					        </div> 
+					    </div>
 
-					DWWWD
-	
-					</div>
-                    <div className="col-2">	
+                        <div className="col-1 h4"> {match.goals.home}</div>
+                        <div className="col-1 h4"> {match.goals.away} </div>
+                    
+                        <div className="col-1">	
+                            <div className = "fixture-teams">
+                            <img src = {match.teams.away.logo}></img>
+					        </div> 
+                        </div>
+					    
+					    <div className="col-2">{match.fixture.date}</div>
 
-					<div className = "fixture-teams">
-						<img src="https://media.api-sports.io/football/teams/541.png" alt="Home Team" />
+					    <div className="col-2">{match.fixture.venue.name}</div>
+					    <div className="col-2">{match.fixture.referee}</div>
+                        <div className = "col 1">{match.fixture.status.short}</div>
+                        <div className = "col 1"> 
+                    
+                            <Button variant="success" size = "sm" onClick={handleTime}>
+                            Stats
+                            </Button>
+                        </div>
 
-					</div> </div>
-
-					
-                    <div className="col-2">	<div className = "fixture-teams">
-						<img src="https://media.api-sports.io/football/teams/541.png" alt="Home Team" />
-					</div> 
-					</div>
-                    <div className="col-2">DDDWW </div>
-					<div className="col-1">15:00</div>
-					<div className="col-1">5/29/24</div>
-					<div className="col-1">Bernabeu</div>
-					<div className="col-1">Perez</div>
                  
-                </div>
-
+                    </div>
+                
+                    ))
+                }
 
 			</div>
 
@@ -158,66 +205,8 @@ const Scoreboard = () => {
 
 
 
-	// const widgetRef = useRef(null);
-
-	// useEffect(() => {
-
-	// 	const script = document.createElement('script');
-	// 	script.src = 'https://widgets.api-sports.io/2.0.3/widgets.js';
-	// 	script.async = true;
-	// 	script.type = 'module';
-
-	// 	document.body.appendChild(script);
-
-	// 	return () => {
-	// 		document.body.removeChild(script);
-	// 	};
-
-	// }, []);
-	
-	// console.log(widgetRef);
-
-	// return (
-    //     <div
-    //         ref={widgetRef}
-    //         id="wg-api-football-games"
-    //         data-host="v3.football.api-sports.io"
-    //         data-key= "6d1c1eae83a98e627d2fd7b059c9ef03" 
-    //         data-date=""
-    //         data-league=""
-    //         data-season=""
-    //         data-theme=""
-    //         data-refresh=""
-    //         data-show-toolbar="true"
-    //         data-show-errors="false"
-    //         data-show-logos="true"
-    //         data-modal-game="true"
-    //         data-modal-standings="true"
-    //         data-modal-show-logos="true">
-    //     </div>
-    // );
 
 }
-
-// 	const [table, setTable] = useState('');
-
-
-// 	useEffect(() => {
-// 		fetch('/scoreboard')
-// 		.then(response => response.json())
-// 		.then(data => setTable(data))
-// 		.catch(err => console.log(err));
-// 	});
-
-//   	return (
-//     	<div className="Home">
-//       	<Container className = "w-100 h-100 title">
-// 			<h1>Live Scores</h1>
-// 			<div dangerouslySetInnerHTML={{ __html: table }}></div>
-//       	</Container>
-
-//     	</div>
-//   )	;
 
 export default Scoreboard;
 
