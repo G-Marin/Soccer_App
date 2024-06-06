@@ -1,19 +1,20 @@
 
 .dropdown-box{
-  margin: auto;
+  margin: auto; 
   width: 80%;
-  height: 90px;
+  height: 100px;
   position:relative;
-  background-color: #ffc400;
+  background-color: rgb(191, 203, 255);
   border-radius: 10px;
 }
 
 
 .outerBox {
     margin: auto;
-    width: 90%;
+ 
     height: 900px;
-    background-color: #040285;
+    background-color:rgb(191, 203, 255);
+    border-radius:10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +24,8 @@
   .innerBox {
     width: 95%;
     height: 90%; 
-    background-color: #fcce39;
+    border-radius:10px;
+    background-color: #ffffff;
     display: flex;
   }
  
@@ -64,12 +66,16 @@
   }
 
   .league-button {
-    background-color: #040285 !important;
+    background-color: rgba(250, 235, 215) !important;
+    color:black !important;
+    font-weight: bold !important;
   }
 
   
   .competition-button {
-    background-color: #b90000 !important;
+    background-color: rgba(250, 235, 215)!important;
+    color:black !important;
+    font-weight: bold !important;
   }
 
   .text-black{

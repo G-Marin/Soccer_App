@@ -68,6 +68,9 @@ const Leagues = () => {
 
     return (
         <Container className="mt-5">
+
+            <h1 className = "text-center text-white mt-5 mb-5"> League Standings </h1>
+
             <Dropdown className="w-100 mb-3">
                 <Dropdown.Toggle variant="light" id="dropdown-basic" className="w-100 btn-sm fw-bold rounded-pill border border-dark">
 

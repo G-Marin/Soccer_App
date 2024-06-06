@@ -1,0 +1,22 @@
+.article-container{
+
+height:70vh;
+}
+
+.article{
+    height:100%;
+    border-style:solid;
+    border-color: rgb(0, 0, 0);
+    border-style:solid;
+    margin:auto;
+    background-color: rgb(194, 186, 177);
+ 
+}
+
+.news-image{
+
+    background-color: aqua;
+    height:50%;
+
+
+}

@@ -41,8 +41,8 @@ function Scores() {
 
 	return (
 
-		<div className="Home">
-      
+		
+		<Container className = "overflow-auto">
 
     			<h1 className = "text-center text-white mt-5 mb-5"> Top Scorers </h1>
 
@@ -72,12 +72,11 @@ function Scores() {
 
 			</div>
 
-
 				<div className = "outerBox">
 	
 					<div className = "innerBox">
 
-					<Container fluid className = "overflow-auto">
+					
 					{scorers.map((scorer, index) => (
                             <div className="row h-25 p-3" key={index}>
                                 <div className="col-2">
@@ -120,13 +119,14 @@ function Scores() {
                             </div>
                         ))}
 				
-					</Container>
+				
+
+					</div>
 
 				</div>
 
-				</div>
-			
-    	</div>
+			</Container>
+				
   	);
 }
 
