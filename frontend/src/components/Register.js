@@ -1,6 +1,6 @@
 import './Login.css';
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import {Container, Dropdown} from 'react-bootstrap';
 import axios from 'axios';
 
 function Login() {
@@ -88,7 +88,25 @@ function Login() {
               onChange={handleChange}
             />
           </div>
+
+		  <Dropdown className="btn" drop = "down-centered">
+          		<Dropdown.Toggle>
+            				League
+          		</Dropdown.Toggle>
+          		<Dropdown.Menu className = "w-100">
+					<Dropdown.Item onClick={() => handleChange('140')}>La Liga</Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleChange('78')}>Bundesliga</Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleChange('39')}>Premier League</Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleChange('262')}>Liga MX</Dropdown.Item>
+          		</Dropdown.Menu>
+        	</Dropdown>
+
+
           <button type="submit" className="btn btn-primary mt-3">Submit</button> 
+
+
+
+
 				</form>
 
 				</div>
