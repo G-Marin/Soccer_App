@@ -1,6 +1,6 @@
 import "./News.css"
 import React, { useState} from 'react';
-import { Dropdown, Container, FormControl,Button} from 'react-bootstrap';
+import { Container, Button} from 'react-bootstrap';
 import axios from 'axios';
 
 const News = () => {

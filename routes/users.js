@@ -1,8 +1,8 @@
 import express from 'express';
-import { addUserSQL, getFavoriteSQL } from '../sql.js';
-import { addUserDB } from '../database.js';
-import { getFavoriteDB } from '../database.js';
-import { hashPassword, authenticateUser} from '../authentication.js';
+import { addUserSQL, getFavoriteSQL } from '../utils/sql.js';
+import { addUserDB } from '../database/database.js';
+import { getFavoriteDB } from '../database/database.js';
+import { hashPassword, authenticateUser} from '../utils/authentication.js';
 
 
 const router = express.Router();

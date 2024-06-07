@@ -2,7 +2,7 @@ import "./Leagues.css";
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {Container, Dropdown, FormControl, Button} from 'react-bootstrap';
+import {Container, Dropdown, FormControl} from 'react-bootstrap';
 
 const Leagues = () => {
 	const [searchQuery, setSearchQuery] = useState('');

@@ -1,5 +1,5 @@
-import { removeFavoriteDB, addFavoriteDB, getFavoriteDB } from "../database.js";
-import { removeFavoriteSQL, addFavoriteSQL, getFavoriteSQL } from "../sql.js";
+import { removeFavoriteDB, addFavoriteDB, getFavoriteDB } from "../database/database.js";
+import { removeFavoriteSQL, addFavoriteSQL, getFavoriteSQL } from "../utils/sql.js";
 import express from 'express';
 
 const router = express.Router();

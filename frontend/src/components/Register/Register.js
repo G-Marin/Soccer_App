@@ -1,7 +1,6 @@
-import './Login.css';
+import '../Login/Login.css';
 import React from 'react';
 import {Container, Form, Button } from 'react-bootstrap';
-import { useEffect } from 'react';
 import axios from 'axios';
 
 function Register() {

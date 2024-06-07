@@ -1,4 +1,4 @@
-import { getNewsQuery } from '../sql.js';
+import { getNewsQuery } from '../utils/sql.js';
 import express from 'express';
 import axios from 'axios';
 import dotenv from 'dotenv';

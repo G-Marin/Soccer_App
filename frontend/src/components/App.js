@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './Header.js';
-import Home from './Home.js';
-import Footer from './Footer.js';
-import Scores from './Scores.js'; 
-import Leagues from './Leagues.js'; 
-import Scoreboard from './Livescore.js'; 
-import Login from './Login.js';
-import Register from './Register.js';
-import News from './News.js';
+import Header from './Header/Header.js';
+import Home from './Home/Home.js';
+import Footer from './Footer/Footer.js';
+import Scores from './Scores/Scores.js'; 
+import Leagues from './Leagues/Leagues.js'; 
+import Scoreboard from './Livescore/Livescore.js'; 
+import Login from './Login/Login.js';
+import Register from './Register/Register.js';
+import News from './News/News.js';
 
 function App() {
   return (

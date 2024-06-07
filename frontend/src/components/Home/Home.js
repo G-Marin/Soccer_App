@@ -1,7 +1,7 @@
-import './Home.css';
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import axios from 'axios';
+import "./Home.css"
+
 
 
 function Home() {
@@ -10,12 +10,10 @@ function Home() {
     <div className="Home">
       
     
+        <Container className = "w-100 h-100">
 
-      <Container className = "w-100 h-100 title">
-
-        <h1 className = "text-center text-white">Welcome to Golazo</h1>
+        <h1 className = "text-center text-white title">Welcome to Golazo</h1>
         
-
         <p className = "text-center text-white">Golazo is a web application that provides live scores, league standings, top scorers, and personalized news for various soccer leagues around the world. </p>
 
 
