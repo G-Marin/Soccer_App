@@ -2,94 +2,86 @@ import "./Livescore.css";
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { Dropdown, Container, FormControl,Button} from 'react-bootstrap';
-import { format } from 'date-fns';
 
 
 
 const Scoreboard = () => {
     
 	const [searchQuery, setSearchQuery] = useState('');
-    const [selectedLeague, setSelectedLeague] = useState(140);
+    const [league, setLeague] = useState(140);
 	const [time, setTime] = useState('past');
     const [fixtures, setFixtures] = useState([]);
+    const [season, setSeason] = useState('2023');
+    const [leaguesList, setLeaguesList] = useState([]);
+    
+    useEffect(() => {
 
-	const leaguesList = [
-        { id: 39, name: 'Premier League' },
-        { id: 140, name: 'La Liga' },
-        { id: 135, name: 'Serie A' },
-        { id: 78, name: 'Bundesliga' },
-        { id: 61, name: 'Ligue 1' },
-        { id: 2, name: 'UEFA Champions League' },
-        { id: 3, name: 'UEFA Europa League' },
-        { id: 848, name: 'UEFA Conference League' },
-        { id: 88, name: 'Eredivisie' },
-        { id: 94, name: 'Primeira Liga' },
-        { id: 71, name: 'Brasileirao Serie A' },
-        { id: 128, name: 'Argentine Primera Division' },
-        { id: 203, name: 'Super Lig' },
-        { id: 253, name: 'MLS' },
-        { id: 144, name: 'First Division A' },
-        { id: 262, name: 'Liga MX' },
-        { id: 40, name: 'Championship' },
-        { id: 98, name: 'J1 League' },
-        { id: 68, name: 'Superleague' },
-        { id: 103, name: 'Eliteserien' }
-    ];
+        const fetchLeagues = async () => {
+            try {
+                const response = await axios.get('/api/leagues', {
+                    params: {},
+                 
+                });
+                setLeaguesList(response.data.response);
+            } catch (err) {
+                console.log(err);
+            }
+        };
 
+        fetchLeagues();
+    });
 
     useEffect(() => {
 
-     
+
         const fetchFixtures = async (league, time) => {
 
-            let params = {
-                season: '2023',
-                league: league,
-            };    
-
-            if (time === 'current') {
-                const today = new Date();
-                params.date = format(today, 'yyyy-MM-dd');
-            } else if (time === 'scheduled') {
-                params.next = 20;
-            } else if (time === 'past') {
-                params.last = 20;
-            }
-
             try {
-                const response = await axios.get('https://v3.football.api-sports.io/fixtures', {
-                    params: params,
-                    headers: {
-                        'x-rapidapi-host': 'v3.football.api-sports.io',
-                        'x-rapidapi-key':'6d1c1eae83a98e627d2fd7b059c9ef03',
-                    }
+                const response = await axios.get('/api/fixtures', {
+                    params: {
+                        league: league,
+                        season: season,
+                        time: time,
+                    },
                 });
-                setFixtures(response.data.response);
+                
 
-                for(let i = 0; i < response.data.response.length; i++) {
-                    console.log(response.data.response[i]);
+                console.log("Fixtures Fetched:", response.data.length)
+
+                for (let i = 0; i < response.data.length; i++) {
+                    console.log(response.data[i].fixture.date)
                 }
 
+
+                setFixtures(response);
             } catch (err) {
                 console.log(err);
             }
         };
 
 
-        fetchFixtures(selectedLeague, time);
-    }, [selectedLeague, time]);
+        fetchFixtures(league, time);
+    }, [league, time, season]);
+
+    useEffect(() => {
+        console.log("Fixtures Updated:", fixtures.length);
+    }, [fixtures]);
 
 
 	const handleSearch = (e) => {
         setSearchQuery(e.target.value);
     };
 
-    const handleLeagueSelect = (id) => {
-        setSelectedLeague(id);
+    const handleSeasonSelect = (season) => {
+        setSeason(season);
+    };
+
+    const handleLeagueSelect = (league) => {
+        setLeague(league);
     };
 
     const filteredLeagues = leaguesList.filter((league) =>
-        league.name.toLowerCase().includes(searchQuery.toLowerCase())
+        league.league.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
 	const handleTime = (time) => {
@@ -100,51 +92,112 @@ const Scoreboard = () => {
 	return (
 
 		<Container className = "mt-5">
-			<Dropdown className="w-100 mb-3">
-                <Dropdown.Toggle variant="light" id="dropdown-basic" className="w-100 btn-sm fw-bold rounded-pill border border-dark">
 
-				Select League/Competition
+
+        <h1 className = "text-center text-white mt-5 mb-5"> Live Scores</h1>
+
+        <div className = "row selection">
+
+            <div className = "col-1">
+
+                <Button className = "w-100 h-100" variant="primary" onClick={() => handleTime("current")}>
+                    Today
+                </Button>
+        
+            </div>
+
+            <div className = "col-2">
+
+            <Button className = "w-100 h-100"  variant="success" onClick={() => handleTime("scheduled")}>
+                Upcoming
+            </Button>
+
+            </div>
+
+            <div className = "col-1 ">
+
+
+            <Button className = "w-100 h-100" variant="dark" onClick={() => handleTime("past")}>
+                Past 
+            </Button>
+
+            </div>
+
+       
+
+
+            <div className = "col-2">
+			    <Dropdown  size = "sm">
+                    <Dropdown.Toggle variant="primary" id="dropdown-basic" className = "w-100">
+
+				    {season}
                 
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="w-100 p-2">
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu >
+                       
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2024')}>2024</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2023')}>2023</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2022')}>2022</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2021')}>2021</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2020')}>2020</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2019')}>2019</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2018')}>2018</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2017')}>2017</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2016')}>2016</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2015')}>2015</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2014')}>2014</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2013')}>2013</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2012')}>2012</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleSeasonSelect('2011')}>2011</Dropdown.Item>
+                            
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
+
+            
+
+            <div className = "col">
+			    <Dropdown className="white" size = "sm">
+                    <Dropdown.Toggle variant="warning" id="dropdown-basic"  className = "w-100" >
+
+
+                    // Logic for getting league name from the api 
+				    {league}
+                
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu className="w-100">
+
                     <FormControl
-                        autoFocus
-                        className="mb-2"
-                        placeholder="Search for a league"
-                        onChange={handleSearch}
-                        value={searchQuery}
-                    />
-                    {filteredLeagues.map((league) => (
-                        <Dropdown.Item key={league.id} onClick={() => handleLeagueSelect(league.id)}>
-                            {league.name}
+                            autoFocus
+                            className=""
+                            placeholder="Search for a league"
+                        
+                            onChange={handleSearch}
+                            value={searchQuery}
+                        />
+
+                       
+                        
+                        
+                        <Dropdown.Item>
+                        Champsions league
+                        <img src = "https://media.api-sports.io/football/leagues/2.png"></img>
                         </Dropdown.Item>
-                    ))}
-                </Dropdown.Menu>
-            </Dropdown>
 
-			<div className = "time-buttons">
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
 
-				<Button variant="primary" onClick={() => handleTime("current")}>
-					Current
-				</Button>
-
-				<Button variant="success" onClick={() => handleTime("scheduled")}>
-					Scheduled
-				</Button>
+        
 
 
-				<Button variant="dark" onClick={() => handleTime("past")}>
-					Past 
-				</Button>
-
-			</div>
+        </div>
 
 
 			<div className = "fixtures-box overflow-auto">		
-
-				<div className="header-box">
+				<div className="header-box p-5">
                     <div className="league-logo">
-                        <img src={`https://media.api-sports.io/football/leagues/${selectedLeague}.png`} alt="League Logo" />
+                        <img src={`https://media.api-sports.io/football/leagues/${league}.png`} alt="League Logo" />
                     </div>
                 </div>
                 
@@ -160,7 +213,6 @@ const Scoreboard = () => {
                     <div className="col-1">Statistics</div>
                 </div>
 
-                
                 {fixtures.map((match) => (
                              
                     <div key = {match.fixture.id} className="row p-3 fw-bold fixture-labels" align = "center">

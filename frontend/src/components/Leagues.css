@@ -45,11 +45,8 @@
 }
 
 .entry{
-    background-color: rgba(175, 175, 175, 0.425);
-    border-color:rgb(0, 0, 0);
-    border-style: solid;
+    background-color:rgba(250, 235, 215, 0.623);
     border-width: 1px;
-    color: rgb(255, 255, 255);
     font-weight: bold;
 }
 

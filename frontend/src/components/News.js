@@ -30,7 +30,9 @@ const News = () => {
 
 		<Container fluid align = "center">
 		      
-			<div className = "h1 mt-2 mb-2 fw-bold fc-white"> News </div>
+			  <h1 className = "text-center text-white mt-5 mb-3"> News</h1>
+
+			  <h4 className = "text-white"> News about your favorite team! </h4>
 
 			<div className = "row article-container flex-nowrap overflow-auto">
 

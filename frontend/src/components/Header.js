@@ -23,7 +23,7 @@ function Header() {
                             
                             <Nav.Link className = "navItem text-white fs-4 " href="/news">News</Nav.Link>
 
-                            <Nav.Link className = "navItem fs-3 text-white" href="/live">Live Scores</Nav.Link>
+                            <Nav.Link className = "navItem fs-4 text-white" href="/live">Live Scores</Nav.Link>
 
                             <Nav.Link className = "navItem text-white fs-4 " href="/standings">League Standings</Nav.Link>
 

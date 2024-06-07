@@ -5,6 +5,7 @@ import userRouter from './routes/users.js';
 import favoriteRouter from './routes/favorite.js';
 import newsRouter from './routes/news.js';
 import cookieParser from 'cookie-parser';
+import apiRouter from './routes/api.js';
 
 
 // Import other routers if needed
@@ -30,6 +31,7 @@ app.use(cookieParser());
 // Routes
 app.use('/user', userRouter);
 app.use('/favorite', favoriteRouter);
+app.use('/api', apiRouter);
 
 // News routes
 app.use('/news', newsRouter);

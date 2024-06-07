@@ -18,9 +18,23 @@
 }
 
 .fixture-teams img{
-    width: 40%;
-    height: 50%;
+    width: 80%;
+    height: 100%
 }
 
+.selection{
+    background-color: rgb(191, 203, 255);
+    border-radius: 5px;
+    padding: 1%;   
+}
+
+
+
+
+.selection button{
+    background-color: rgb(255, 255, 255);
+    color:black;
+    border-width: 0;
+}
 
 

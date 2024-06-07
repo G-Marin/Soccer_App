@@ -1,16 +1,23 @@
 import './Login.css';
 import React from 'react';
-import {Container, Dropdown} from 'react-bootstrap';
+import {Container, Form, Button } from 'react-bootstrap';
+import { useEffect } from 'react';
 import axios from 'axios';
 
-function Login() {
+function Register() {
 
+
+	const [teams, SetTeams] = React.useState(["Barcelona", "Real Madrid", "Manchester United", "Liverpool", "Chelsea", "Arsenal", "Manchester City", "Tottenham Hotspur", "Bayern Munich", "Borussia Dortmund", "Paris Saint-Germain", "Juventus", "Inter Milan", "AC Milan", "Atletico Madrid", "Sevilla", "Valencia", "Villarreal", "Real Betis", "Real Sociedad", "Athletic Bilbao", "Leicester City", "West Ham United", "Everton", "Aston Villa", "Leeds United", "Wolverhampton Wanderers", "Crystal Palace", "Newcastle United", "Southampton", "Brighton & Hove Albion", "Burnley", "Fulham", "West Bromwich Albion", "Sheffield United"]);
 
 	const [formData, setFormData] = React.useState({
 		username: '',
 		password: '',
 		email: '',
+		team: '',
 	});
+
+
+	
 
 
 	// Function to update state on input change
@@ -51,64 +58,78 @@ function Login() {
 			
 			
 				<div className="text-white mb-5">
-	
-				<form onSubmit={handleSubmit} className = "w-25 text-start">
-					<div className="form-group">
-						<label htmlFor="username" className="text-white">Username:
-						</label>
-							<input
-								type="text"
-								className="form-control"
-								id="username"
-								name="username"
-								value={formData.username}
-								onChange={handleChange}
+
+					<Form>
+
+						<Form.Group className="mb-1 w-25" controlId="form" align = "left">
+
+							<Form.Label className="text-white" >Username</Form.Label>
+
+							<Form.Control 
+							type="text" 
+							placeholder="Enter username" 
+							name="username"
+							value={formData.username}
+							onChange={handleChange}
 							/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="password" 	className="text-white">Password:
-						</label>
-						<input
-							type="password"
-							className="form-control"
-							id="password"
+
+						</Form.Group>
+
+						<Form.Group className="mb-1 w-25" controlId="form" align = "left">
+
+							<Form.Label className="text-white">Password</Form.Label>
+
+							<Form.Control 
+							type="password" 
+							placeholder="Enter Password" 
 							name="password"
 							value={formData.password}
 							onChange={handleChange}
-						/>
-					</div>
-          <div className="form-group">
-            <label htmlFor="email" className="text-white">Email:</label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
+							/>
 
-		  <Dropdown className="btn" drop = "down-centered">
-          		<Dropdown.Toggle>
-            				League
-          		</Dropdown.Toggle>
-          		<Dropdown.Menu className = "w-100">
-					<Dropdown.Item onClick={() => handleChange('140')}>La Liga</Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleChange('78')}>Bundesliga</Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleChange('39')}>Premier League</Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleChange('262')}>Liga MX</Dropdown.Item>
-          		</Dropdown.Menu>
-        	</Dropdown>
+						</Form.Group>
+						<Form.Group className="mb-1 w-25" controlId="form" align = "left">
+
+							<Form.Label className="text-white">Email</Form.Label>
+
+							<Form.Control 
+							type="email" 
+							placeholder="Enter Email" 
+							name="email"
+							value={formData.email}
+							onChange={handleChange}
+							/>
+
+						</Form.Group>
+
+						<Form.Group>
+
+							<Form.Label className="text-white" >Select your favorite team</Form.Label>
+
+							<Form.Select 
+							className="mb-3 w-25" 
+							aria-label="Default select example"
+							name="team"
+							value={formData.team}
+							onChange={handleChange}							
+							>
+
+								<option>Select your favorite team</option>
+
+								{teams.map((team, index) => (
+									<option key={index} value={team}>{team}</option>
+								))}
+
+							</Form.Select>
 
 
-          <button type="submit" className="btn btn-primary mt-3">Submit</button> 
+						</Form.Group>
 
+						<Button type = "submit" onClick = {handleSubmit}> Submit </Button>
 
-
-
-				</form>
-
+					</Form>
+	
+			
 				</div>
 
 
@@ -126,4 +147,4 @@ function Login() {
 	);
 }
 
-export default Login;
+export default Register;
