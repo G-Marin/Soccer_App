@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import userRouter from './routes/users.js';
 import favoriteRouter from './routes/favorite.js';
-import newsRouter from './routes/news.js';
+import newsRouter from './routes/getNews.js';
 import cookieParser from 'cookie-parser';
 import apiRouter from './routes/api.js';
 
@@ -22,7 +22,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // Serve static files from the React app
-// app.use(express.static(path.join(__dirname, 'frontend/build')));
+app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.use(express.json());
 
@@ -34,14 +34,11 @@ app.use('/favorite', favoriteRouter);
 app.use('/api', apiRouter);
 
 // News routes
-app.use('/news', newsRouter);
+app.use('/getNews', newsRouter);
 
-
-// Catch all other routes
-app.use('/' , (req, res) => {
-  res.send("Hello World");
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
 });
-
 
 // Catch 404 and forward to error handler (optional, but recommended)
 app.use((req, res, next) => {

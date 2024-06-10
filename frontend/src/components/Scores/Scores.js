@@ -16,18 +16,22 @@ function Scores() {
 
 	useEffect(() => {
 
-		const fetchLeagues = async (season) => {
+        const fetchLeagues = async () => {
             try {
                 const response = await axios.get('/api/leagues', {
-                    params: {
-                        season: season,
-                    },
+                    params: {},
+                 
                 });
                 setLeaguesList(response.data);
             } catch (err) {
                 console.log(err);
             }
         };
+
+        fetchLeagues();
+    }, []);
+
+    useEffect(() => {
 		
 		const fetchScorers = async (league, season) => {
 			axios.get('api/topscorers', {
@@ -37,7 +41,7 @@ function Scores() {
 				},
 				})
 				.then(response => {
-				setScorers(response.data.response);
+				setScorers(response.data);
 				})
 				.catch(err => {
 				console.log(err);
@@ -45,7 +49,6 @@ function Scores() {
 		};
 		
 
-        fetchLeagues(season);
         fetchScorers(league, season);
     }, [league, season]);
 
@@ -106,7 +109,7 @@ function Scores() {
 					</Dropdown>
 				</div>
   
-				<div className = "col">
+				<div className = "col dropdown-form">
 					<Dropdown className="white" size = "sm">
 						<Dropdown.Toggle variant="warning" id="dropdown-basic"  className = "w-100" >
 

@@ -1,6 +1,6 @@
 import express from 'express';
-import { addUserSQL, getFavoriteSQL } from '../utils/sql.js';
-import { addUserDB } from '../database/database.js';
+import { addUserSQL, getFavoriteSQL, getUserIdSQL } from '../utils/sql.js';
+import { addUserDB, getUserIdDB } from '../database/database.js';
 import { getFavoriteDB } from '../database/database.js';
 import { hashPassword, authenticateUser} from '../utils/authentication.js';
 
@@ -45,15 +45,13 @@ router.post('/add', async (req, res) => {
 
     const user_data = Object.values(user);
 
-    console.log('Query:', query)
-    console.log('User:', user)
-
     try {
         const result = await addUserDB(query, user_data);
         res.status(200).json(result);
     } catch(err) {
         res.status(500).json(err.message)
     }
+
 });
 
 router.post('/remove', async  (req, res) => {
@@ -82,6 +80,23 @@ router.post('/update', async (req, res) => {
 
     try {
         const result = await addUserDB(query, user_data);
+        res.status(200).json(result);
+    } catch(err) {
+        res.status(500).json(err.message)
+    }
+});
+
+router.get('/id', async (req, res) => {
+
+    const user = req.query.username;
+    const query = getUserIdSQL();
+  
+    console.log('Query:', query)
+    console.log('User:', user)
+
+    try {
+        const result = await getUserIdDB(query, user);
+        console.log('Result: Here', result)
         res.status(200).json(result);
     } catch(err) {
         res.status(500).json(err.message)

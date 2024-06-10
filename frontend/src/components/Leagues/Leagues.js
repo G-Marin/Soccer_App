@@ -13,18 +13,22 @@ const Leagues = () => {
 
     useEffect(() => {
 
-        const fetchLeagues = async (season) => {
+        const fetchLeagues = async () => {
             try {
                 const response = await axios.get('/api/leagues', {
-                    params: {
-                        season: season,
-                    },
+                    params: {},
+                 
                 });
                 setLeaguesList(response.data);
             } catch (err) {
                 console.log(err);
             }
         };
+
+        fetchLeagues();
+    }, []);
+
+    useEffect(() => {
 
         const fetchStandings = async (league, season) => {
             try {
@@ -34,13 +38,13 @@ const Leagues = () => {
                         league: league,
                     },
                 });
-                setStandings(response.data);
+
+                setStandings(response.data[0].league.standings);
             } catch (err) {
                 console.log(err);
             }
         };
 
-        fetchLeagues(season);
         fetchStandings(league, season);
     }, [league, season]);
 
@@ -98,7 +102,7 @@ const Leagues = () => {
             </div>
 
 
-            <div className = "col">
+            <div className = "col dropdown-form">
 			    <Dropdown className="white" size = "sm">
                     <Dropdown.Toggle variant="warning" id="dropdown-basic"  className = "w-100" >
 
@@ -108,7 +112,6 @@ const Leagues = () => {
                     <Dropdown.Menu className="w-100">
                         <FormControl
                             autoFocus
-                            className=""
                             placeholder="Search for a league"
                         
                             onChange={handleSearch}

@@ -77,6 +77,38 @@ async function getFavoriteDB(query, data) {
 }
 
 
+// Get favorite for user from the database
+async function getUserIdDB(query, data) {
+    try{
+
+        const result = await pool.query(query, [data]);
+
+        console.log("Result: ", result.rows[0])
+
+        return result.rows[0];
+    }
+    catch (error) {
+        console.error('Error adding user:', error);
+        throw new Error('Error adding user');
+      }
+
+}
+
+// Get favorite for user from the database
+async function getTeamIdDB(query, data) {
+
+    try{
+    
+        const result = await pool.query(query, [data]);
+        return result.rows[0];
+    }
+    catch (error) {
+        console.error('Error adding user:', error);
+        throw new Error('Error adding user');
+      }
+
+}
 
 
-export { addUserDB, addFavoriteDB, removeFavoriteDB, getFavoriteDB, getUserDB} 
+
+export { addUserDB, addFavoriteDB, removeFavoriteDB, getFavoriteDB, getUserDB, getUserIdDB, getTeamIdDB} 

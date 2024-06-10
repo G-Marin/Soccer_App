@@ -20,67 +20,67 @@
     position:relative;
   }
   
-  .innerBox {
-    width: 95%;
-    height: 90%; 
-    border-radius:10px;
-    background-color: #ffffff;
-    display: flex;
-  }
+.innerBox {
+  width: 95%;
+  height: 90%; 
+  border-radius:10px;
+  background-color: #ffffff;
+  display: flex;
+}
  
-  .picture {
-    width: 95%;
-    height: 95%;
+.picture {
+  width: 95%;
+  height: 95%;
+}
 
-  }
+.picture img{
+  width: 80%;
+  height: 80%;
+}
 
-  .picture img{
-    width: 80%;
-    height: 80%;
-  }
+.team{
+  width: 50%;
+  height: 50%;
+}
 
-  .team{
-    width: 50%;
-    height: 50%;
-  }
+.flag{
+  width: 10%;
+  height: 10%;
+}
 
-  .flag{
-      width: 10%;
-      height: 10%;
-  }
-
-  .league {
-    margin-left:5%;
-    width: 40%;
-  }
+.league {
+  margin-left:5%;
+  width: 40%;
+}
   
-  .competition {
-    margin-left:7%;
-    width: 40%;
-  }
+.competition {
+  margin-left:7%;
+  width: 40%;
+}
 
-  .league-button, .competition-button {
-    width: 100%;
-    height: 70px;
-  }
+.league-button, .competition-button {
+  width: 100%;
+  height: 70px;
+}
 
-  .league-button {
-    background-color: rgba(250, 235, 215) !important;
-    color:black !important;
-    font-weight: bold !important;
-  }
+.league-button {
+  background-color: rgba(250, 235, 215) !important;
+  color:black !important;
+  font-weight: bold !important;
+}
 
-  
-  .competition-button {
-    background-color: rgba(250, 235, 215)!important;
-    color:black !important;
-    font-weight: bold !important;
-  }
+.competition-button {
+  background-color: rgba(250, 235, 215)!important;
+  color:black !important;
+  font-weight: bold !important;
+}
 
-  .text-black{
-    
-    font-size:16px;
-    
+.text-black{
+  font-size:16px;
+}
 
-  }
+.dropdown-form img{
+  width: 5%;
+  height: 10%;
+}
   

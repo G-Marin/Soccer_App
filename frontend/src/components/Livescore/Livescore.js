@@ -22,17 +22,16 @@ const Scoreboard = () => {
                     params: {},
                  
                 });
-                setLeaguesList(response.data.response);
+                setLeaguesList(response.data);
             } catch (err) {
                 console.log(err);
             }
         };
 
         fetchLeagues();
-    });
+    }, []);
 
     useEffect(() => {
-
 
         const fetchFixtures = async (league, time) => {
 
@@ -45,15 +44,8 @@ const Scoreboard = () => {
                     },
                 });
                 
+                setFixtures(response.data);
 
-                console.log("Fixtures Fetched:", response.data.length)
-
-                for (let i = 0; i < response.data.length; i++) {
-                    console.log(response.data[i].fixture.date)
-                }
-
-
-                setFixtures(response);
             } catch (err) {
                 console.log(err);
             }
@@ -62,10 +54,6 @@ const Scoreboard = () => {
 
         fetchFixtures(league, time);
     }, [league, time, season]);
-
-    useEffect(() => {
-        console.log("Fixtures Updated:", fixtures.length);
-    }, [fixtures]);
 
 
 	const handleSearch = (e) => {
@@ -156,7 +144,7 @@ const Scoreboard = () => {
 
             
 
-            <div className = "col">
+            <div className = "col dropdown-form">
 			    <Dropdown className="white" size = "sm">
                     <Dropdown.Toggle variant="warning" id="dropdown-basic"  className = "w-100" >
 
@@ -169,20 +157,22 @@ const Scoreboard = () => {
 
                     <FormControl
                             autoFocus
-                            className=""
                             placeholder="Search for a league"
                         
                             onChange={handleSearch}
                             value={searchQuery}
                         />
 
-                       
-                        
-                        
-                        <Dropdown.Item>
-                        Champsions league
-                        <img src = "https://media.api-sports.io/football/leagues/2.png"></img>
-                        </Dropdown.Item>
+                            {filteredLeagues.map((league) => (
+                                <Dropdown.Item key={league.league.id} onClick={() => handleLeagueSelect(league.league.id)}>
+
+
+                                    <img src={league.league.logo} alt={league.league.name}  />
+                               
+
+                                    {league.league.name}
+                                </Dropdown.Item>
+                            ))} 
 
                     </Dropdown.Menu>
                 </Dropdown>

@@ -22,6 +22,12 @@ function getUserSQL() {
     return sql; 
 }
 
+function getUserIdSQL() {
+    const sql = `SELECT user_id FROM users WHERE username = $1::character varying;`
+
+    return sql; 
+}
+
 function removeFavoriteSQL() {
     const sql = `DELETE FROM public.users_teams
     WHERE (user_id, team_id) IN
@@ -37,6 +43,12 @@ function getFavoriteSQL () {
     return sql;
 }
 
+function getTeamIdSQL() {
+    const sql = `SELECT team_id FROM teams WHERE team_name = $1::character varying;`
+
+    return sql;
+}
+
 
 
 function getNewsQuery (team) {
@@ -48,4 +60,4 @@ function getNewsQuery (team) {
 
 
 
-export { addUserSQL, addFavoriteSQL, removeFavoriteSQL, getFavoriteSQL, getNewsQuery, getUserSQL};
+export { addUserSQL, addFavoriteSQL, removeFavoriteSQL, getFavoriteSQL, getNewsQuery, getUserSQL, getUserIdSQL, getTeamIdSQL};

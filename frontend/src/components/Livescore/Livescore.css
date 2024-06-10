@@ -29,12 +29,14 @@
 }
 
 
-
-
 .selection button{
     background-color: rgb(255, 255, 255);
     color:black;
     border-width: 0;
 }
 
+.dropdown-form img{
+    width: 5%;
+    height: 10%;
+}
 

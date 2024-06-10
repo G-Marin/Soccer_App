@@ -54,8 +54,6 @@ router.get('/fixtures', async (req, res) => {
 router.get('/leagues', async (req, res) => {
 
     
-
-
         try {
             const response = await axios.get('https://v3.football.api-sports.io/leagues', {
                 params: {
@@ -68,8 +66,6 @@ router.get('/leagues', async (req, res) => {
             });
             
            
-
-
             res.status(200).json(response.data.response);
         } catch (err) {
             res.status(500).json(err.message)
@@ -84,7 +80,7 @@ router.get('/standings', async (req, res) => {
     const league = req.query.league;
 
     try {
-        const response = await axios.get('https://v3.football.api-sports.io/fixtures', {
+        const response = await axios.get('https://v3.football.api-sports.io/standings', {
             params: {
                 season: season,
                 league: league,
@@ -94,6 +90,9 @@ router.get('/standings', async (req, res) => {
                 'x-rapidapi-key': process.env.API_KEY,
             }
         });
+        
+console.log(response.data.response);
+
         res.status(200).json(response.data.response);
     } catch (err) {
         res.status(500).json(err.message)

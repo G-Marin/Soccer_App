@@ -6,7 +6,7 @@ import axios from 'axios';
 function Register() {
 
 
-	const [teams, SetTeams] = React.useState(["Barcelona", "Real Madrid", "Manchester United", "Liverpool", "Chelsea", "Arsenal", "Manchester City", "Tottenham Hotspur", "Bayern Munich", "Borussia Dortmund", "Paris Saint-Germain", "Juventus", "Inter Milan", "AC Milan", "Atletico Madrid", "Sevilla", "Valencia", "Villarreal", "Real Betis", "Real Sociedad", "Athletic Bilbao", "Leicester City", "West Ham United", "Everton", "Aston Villa", "Leeds United", "Wolverhampton Wanderers", "Crystal Palace", "Newcastle United", "Southampton", "Brighton & Hove Albion", "Burnley", "Fulham", "West Bromwich Albion", "Sheffield United"]);
+	const [teams, SetTeams] = React.useState(["Barça", "Real Madrid", "Manchester United", "Liverpool", "Chelsea", "Arsenal", "Manchester City", "Tottenham Hotspur", "Bayern Munich", "Borussia Dortmund", "Paris Saint-Germain", "Juventus", "Inter Milan", "AC Milan", "Atletico Madrid", "Sevilla", "Valencia", "Villarreal", "Real Betis", "Real Sociedad", "Athletic Bilbao", "Leicester City", "West Ham United", "Everton", "Aston Villa", "Leeds United", "Wolverhampton Wanderers", "Crystal Palace", "Newcastle United", "Southampton", "Brighton & Hove Albion", "Burnley", "Fulham", "West Bromwich Albion", "Sheffield United"]);
 
 	const [formData, setFormData] = React.useState({
 		username: '',
@@ -14,9 +14,6 @@ function Register() {
 		email: '',
 		team: '',
 	});
-
-
-	
 
 
 	// Function to update state on input change
@@ -33,16 +30,56 @@ function Register() {
 
 		e.preventDefault();
 
+		const userData = {
+			username: formData.username,
+			password: formData.password,
+			email: formData.email,
+		};
+
+		const favoriteData = {
+			username: formData.username,
+			team: formData.team,
+		};
+
+
 		try {
-			const response = await axios.post('/user/add', formData, {
+			const response = await axios.post('/user/add', userData, {
 				headers: {
 					'Content-Type': 'application/json',
 				},
 			});
-			console.log('Response:', response.data);
+		 
+			const userResult = await axios.get('/user/id', {
+				params: {
+					username: formData.username,
+				},
+			});
+
+
+			const favoriteResult = await axios.get('/favorite/id', {
+				params: {
+					team: formData.team,
+				},
+			});
+
+			const data = {
+				user_id: userResult.data.user_id,
+				favorite_id: favoriteResult.data.team_id,
+			}
+
+
+			const favoriteResponse = await axios.post('/favorite/add', data, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+
+			console.log('User added:', favoriteResponse);
+			
 		} catch (error) {
-			console.error('Error posting data:', error);
+			console.error('Error adding user:', error);
 		}
+
 	};
 
 
