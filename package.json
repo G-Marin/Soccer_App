@@ -6,7 +6,9 @@
     "start": "node ./bin/www",
     "server": "nodemon ./bin/www",
     "frontend": "npm start --prefix frontend",
-    "build" : "npm run build --prefix frontend",
+    "frontend-dep": "npm install --prefix frontend",
+    "backend-dep": "npm install",
+    "build" : "backend-dep && frontend-dep && npm run build --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run frontend\""
   },
   "dependencies": {
