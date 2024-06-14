@@ -149,7 +149,7 @@ const Scoreboard = () => {
                     <Dropdown.Toggle variant="warning" id="dropdown-basic"  className = "w-100" >
 
 
-                    // Logic for getting league name from the api 
+                    
 				    {league}
                 
                     </Dropdown.Toggle>

@@ -39,7 +39,7 @@ const Leagues = () => {
                     },
                 });
 
-                setStandings(response.data[0].league.standings);
+                setStandings(response.data[0]);
             } catch (err) {
                 console.log(err);
             }
@@ -112,7 +112,7 @@ const Leagues = () => {
                     <Dropdown.Menu className="w-100">
                         <FormControl
                             autoFocus
-                            placeholder="Search for a league"
+                            placeholder="Search for a league fds"
                         
                             onChange={handleSearch}
                             value={searchQuery}
@@ -152,21 +152,21 @@ const Leagues = () => {
                     <div className="col-2" align="center">Form</div>
                 </div>
 
-                {standings.map((team, index) => (
-                    <div key={team.team.id} className="row p-3 entry">
+                {standings.map((rank, index) => (
+                    <div key={rank.team.id} className="row p-3 entry">
                         <div className="col-1 fw-bold">{index + 1}</div>
-                        <div className="col-1 team-logo">
-                            <img src={team.team.logo} alt={team.team.name} />
+                        <div className="col-1 team-logo picture">
+                            <img src={rank.team.logo} alt={rank.team.name} />
                         </div>
-                        <div className="col-1">{team.points}</div>
-                        <div className="col-1">{team.all.win}</div>
-                        <div className="col-1">{team.all.draw}</div>
-                        <div className="col-1">{team.all.lose}</div>
-                        <div className="col-1">{team.all.goals.for}</div>
-                        <div className="col-1">{team.all.goals.against}</div>
-                        <div className="col-1">{team.goalsDiff}</div>
-                        <div className="col-1">{team.all.played}</div>
-                        <div className="col-2" align="center">{team.form}</div>
+                        <div className="col-1">{rank.points}</div>
+                        <div className="col-1">{rank.all.win}</div>
+                        <div className="col-1">{rank.all.draw}</div>
+                        <div className="col-1">{rank.all.lose}</div>
+                        <div className="col-1">{rank.all.goals.for}</div>
+                        <div className="col-1">{rank.all.goals.against}</div>
+                        <div className="col-1">{rank.goalsDiff}</div>
+                        <div className="col-1">{rank.all.played}</div>
+                        <div className="col-2" align="center">{rank.form}</div>
                     </div>
                 ))}
             </div>

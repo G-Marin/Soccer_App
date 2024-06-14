@@ -2,9 +2,11 @@ import '../Login/Login.css';
 import React from 'react';
 import {Container, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
 
+	const navigate = useNavigate();
 
 	const [teams, SetTeams] = React.useState(["Barça", "Real Madrid", "Manchester United", "Liverpool", "Chelsea", "Arsenal", "Manchester City", "Tottenham Hotspur", "Bayern Munich", "Borussia Dortmund", "Paris Saint-Germain", "Juventus", "Inter Milan", "AC Milan", "Atletico Madrid", "Sevilla", "Valencia", "Villarreal", "Real Betis", "Real Sociedad", "Athletic Bilbao", "Leicester City", "West Ham United", "Everton", "Aston Villa", "Leeds United", "Wolverhampton Wanderers", "Crystal Palace", "Newcastle United", "Southampton", "Brighton & Hove Albion", "Burnley", "Fulham", "West Bromwich Albion", "Sheffield United"]);
 
@@ -68,12 +70,13 @@ function Register() {
 			}
 
 
-			const favoriteResponse = await axios.post('/favorite/add', data, {
-				headers: {
-					'Content-Type': 'application/json',
-				},
+			const favoriteResponse = await axios.post('/favorite/add', {
+				user_id: data.user_id,
+				favorite_id: data.favorite_id,
 			});
 
+
+			navigate("/login");
 			console.log('User added:', favoriteResponse);
 			
 		} catch (error) {

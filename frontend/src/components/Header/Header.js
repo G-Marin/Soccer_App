@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Navbar, Nav, Container, Button} from 'react-bootstrap';
+import { AuthContext } from '../../utils/context';
 
 
 function Header() {
+
+
+    const {isLoggedIn, logout, checkLoginStatus } = useContext(AuthContext);
+
+    useEffect(() => {      
+        checkLoginStatus()
+    }, []);
+
+
     return (
         <div className="Header">
       
-            
 
             <Navbar className = "bg-dark-blue" expand="lg">
 
@@ -29,15 +38,16 @@ function Header() {
 
                             <Nav.Link className = "navItem text-white fs-4 " href="/scorers">Top Scorers</Nav.Link>
 
-                            
-                            
                         </Nav>       
 
                     </Navbar.Collapse>
 
                     <div style={{ width: '80px' }}></div>
 
-                    <Button className = "loginButton btn p-2 ml-3 fw-bold" href="/login">Login</Button>
+                    {isLoggedIn ? <Button variant = "danger" className = "loginButton btn p-2 ml-3 fw-bold" onClick={logout}>Logout</Button>                   
+                    :                                   
+                    <Button className = "loginButton btn p-2 ml-3 fw-bold" href="/login">Login</Button>}
+
 
                 </Container>
             </Navbar>

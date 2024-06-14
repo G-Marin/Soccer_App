@@ -16,20 +16,15 @@ router.post('/login', async (req, res) => {
     const query = getFavoriteSQL();
     const favoriteTeam = await getFavoriteDB(query, [username]);
 
-    console.log("Favorite team:", favoriteTeam)
-
-    console.log("Authenticated:", authenticated)
 
     if (authenticated) {
     
-        res.cookie('favorite_team', favoriteTeam, { maxAge: 900000, httpOnly: true })
-    
-        res.cookie('logged_in', true, { maxAge: 900000, httpOnly: true })
+        res.cookie('username', username, { httpOnly: false });
+        res.cookie('favorite_team', favoriteTeam, { httpOnly: false });
 
-        res.status(200).json({ message: 'Login successful' });
+        res.status(200).json();
+
     } else {
-
-
         res.status(401).json({ message: 'Invalid credentials' });
     }
 });
@@ -59,8 +54,6 @@ router.post('/remove', async  (req, res) => {
     const query = addUserSQL(user);
     const user_data = Object.values(user);
 
-    console.log('Query:', query)
-    console.log('User:', user)
 
     try {
         const result = await addUserDB(query, user_data);
@@ -75,9 +68,6 @@ router.post('/update', async (req, res) => {
     const query = addUserSQL(user);
     const user_data = Object.values(user);
 
-    console.log('Query:', query)
-    console.log('User:', user)
-
     try {
         const result = await addUserDB(query, user_data);
         res.status(200).json(result);
@@ -91,8 +81,6 @@ router.get('/id', async (req, res) => {
     const user = req.query.username;
     const query = getUserIdSQL();
   
-    console.log('Query:', query)
-    console.log('User:', user)
 
     try {
         const result = await getUserIdDB(query, user);
@@ -102,5 +90,32 @@ router.get('/id', async (req, res) => {
         res.status(500).json(err.message)
     }
 });
+
+router.get('/status', (req, res) => {
+
+    if (req.cookies.username) {
+        res.status(200).json({ status: 'authenticated' });
+    }
+    else {
+        res.status(401).json({ status: 'unauthenticated' });
+    }
+    }
+);
+
+router.get('/data', (req, res) => {
+
+    username = req.cookies.username;
+    favorite_team = req.cookies.favorite_team;
+
+    res.status(200).json({ username: username, favorite_team: favorite_team });
+});
+
+router.post('/logout', (req, res) => {
+    res.clearCookie('username');
+    res.clearCookie('favorite_team');
+    res.status(200).json();
+});
+
+
 
 export default router;

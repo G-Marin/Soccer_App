@@ -91,9 +91,9 @@ router.get('/standings', async (req, res) => {
             }
         });
         
-console.log(response.data.response);
+        res.status(200).json(response.data.response[0].league.standings);
 
-        res.status(200).json(response.data.response);
+
     } catch (err) {
         res.status(500).json(err.message)
     }
@@ -117,6 +117,10 @@ router.get('/scorers', async (req, res) => {
                 'x-rapidapi-key': process.env.API_KEY,
             }
         });
+
+
+        console.log(response.data.response)
+
         res.status(200).json(response.data.response);
     } catch (err) {
         res.status(500).json(err.message)

@@ -20,7 +20,7 @@ async function getUserDB(query, username) {
 
     try{
         const result = await pool.query(query, [username]);
-        console.log("Result: ", result.rows[0])
+       
         return result.rows[0];
     }
 
@@ -82,8 +82,6 @@ async function getUserIdDB(query, data) {
     try{
 
         const result = await pool.query(query, [data]);
-
-        console.log("Result: ", result.rows[0])
 
         return result.rows[0];
     }

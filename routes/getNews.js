@@ -20,7 +20,6 @@ router.get('/', async (req, res) => {
     
     const query = getNewsQuery()
 
-
     try {
         const response = await axios.get(query, {
             params: {
@@ -44,6 +43,7 @@ router.get('/', async (req, res) => {
                 "description": response.data.articles[i].description,
                 "url": response.data.articles[i].url,
                 "urlToImage": response.data.articles[i].urlToImage,
+                "source": response.data.articles[i].source
             }
             news.push(article);
         }

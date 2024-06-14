@@ -1,22 +1,61 @@
-.article-container{
+.article-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to avoid cutting off articles */
+    justify-content: center;
+    margin-left:1000px;
+  }
+  
+  .article {
+    flex: 0 0 calc(25% - 1rem); /* 4 articles per row with spacing */
+    margin: 0.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .news-title {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    font-weight: bold;
+    text-align: center;
+    min-height: 4rem; /* Adjust this height to fit the longest title you expect */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-height:70vh;
-}
+  .news-description{
+    font-size: 1rem;;
+  }
+  
+  .news-image {
+    width: 100%;
+    height: 200px; /* Set a fixed height for the image container */
+    margin-top: 1rem;
+    overflow: hidden;
+    border-radius: 10px;
+  }
 
-.article{
-    height:100%;
-    border-style:solid;
-    border-color: rgb(0, 0, 0);
-    border-style:solid;
-    margin:auto;
-    background-color: rgb(194, 186, 177);
- 
-}
-
-.news-image{
-
-    background-color: aqua;
-    height:50%;
-
-
-}
+  .news-source{
+    font-size: 1rem;
+    margin-top: 1rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .news-button {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  

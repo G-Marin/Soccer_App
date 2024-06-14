@@ -34,7 +34,7 @@ function Scores() {
     useEffect(() => {
 		
 		const fetchScorers = async (league, season) => {
-			axios.get('api/topscorers', {
+			axios.get('api/scorers', {
 				params: {
 				season: season,
 				league: league,
