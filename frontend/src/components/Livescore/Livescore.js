@@ -1,35 +1,20 @@
 import "./Livescore.css";
 import axios from "axios";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext} from 'react';
 import { Dropdown, Container, FormControl,Button} from 'react-bootstrap';
+import { LeagueContext } from '../../utils/leaguecontext.js';
 
 
 
 const Scoreboard = () => {
     
 	const [searchQuery, setSearchQuery] = useState('');
-    const [league, setLeague] = useState(140);
+    const [league, setLeague] = useState({id: 140, name: 'La Liga'});
 	const [time, setTime] = useState('past');
     const [fixtures, setFixtures] = useState([]);
     const [season, setSeason] = useState('2023');
-    const [leaguesList, setLeaguesList] = useState([]);
-    
-    useEffect(() => {
+    const {leaguesList} = useContext(LeagueContext);
 
-        const fetchLeagues = async () => {
-            try {
-                const response = await axios.get('/api/leagues', {
-                    params: {},
-                 
-                });
-                setLeaguesList(response.data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-
-        fetchLeagues();
-    }, []);
 
     useEffect(() => {
 
@@ -65,11 +50,11 @@ const Scoreboard = () => {
     };
 
     const handleLeagueSelect = (league) => {
-        setLeague(league);
+        setLeague({id: league.id, name: league.name});
     };
 
     const filteredLeagues = leaguesList.filter((league) =>
-        league.league.name.toLowerCase().includes(searchQuery.toLowerCase())
+        league.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
 	const handleTime = (time) => {
@@ -145,37 +130,27 @@ const Scoreboard = () => {
             
 
             <div className = "col dropdown-form">
-			    <Dropdown className="white" size = "sm">
-                    <Dropdown.Toggle variant="warning" id="dropdown-basic"  className = "w-100" >
-
-
-                    
-				    {league}
-                
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu className="w-100">
-
-                    <FormControl
-                            autoFocus
-                            placeholder="Search for a league"
-                        
-                            onChange={handleSearch}
-                            value={searchQuery}
-                        />
-
+            <Dropdown className="white" size="sm">
+                        <Dropdown.Toggle variant="warning" id="dropdown-basic" className="w-100">
+                            {league.name}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu className="w-100">
+                            <FormControl
+                                autoFocus
+                                placeholder="Search for a league"
+                                onChange={handleSearch}
+                                value={searchQuery}
+                            />
                             {filteredLeagues.map((league) => (
-                                <Dropdown.Item key={league.league.id} onClick={() => handleLeagueSelect(league.league.id)}>
-
-
-                                    <img src={league.league.logo} alt={league.league.name}  />
-                               
-
-                                    {league.league.name}
+                                <Dropdown.Item
+                                    key={league.id}
+                                    onClick={() => handleLeagueSelect(league)}
+                                    >
+                                    {league.name}
                                 </Dropdown.Item>
-                            ))} 
-
-                    </Dropdown.Menu>
-                </Dropdown>
+                            ))}
+                        </Dropdown.Menu>
+                    </Dropdown>
             </div>
 
         

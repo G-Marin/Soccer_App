@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import { Navbar, Nav, Container, Button} from 'react-bootstrap';
-import { AuthContext } from '../../utils/context';
+import { AuthContext } from '../../utils/authcontext';
 
 
 function Header() {
