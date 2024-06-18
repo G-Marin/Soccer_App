@@ -5,6 +5,8 @@ import axios from 'axios';
 
 dotenv.config();
 
+
+// Returns fixures given a league and season 
 router.get('/fixtures', async (req, res) => {
 
    
@@ -51,6 +53,8 @@ router.get('/fixtures', async (req, res) => {
 });
 
 
+
+// Returns leagues/competitions given a season 
 router.get('/leagues', async (req, res) => {
 
     
@@ -74,6 +78,7 @@ router.get('/leagues', async (req, res) => {
 });
 
 
+// Returns standings given a season and league
 router.get('/standings', async (req, res) => {
 
     const season = req.query.season;
@@ -101,6 +106,7 @@ router.get('/standings', async (req, res) => {
 
 });
 
+// Returns top scorers given a season and league
 router.get('/scorers', async (req, res) => {
 
     const season = req.query.season;
@@ -129,6 +135,8 @@ router.get('/scorers', async (req, res) => {
 
 });
 
+
+// Returns all teams in DB
 router.get('/teams', async (req, res) => {
 
     try {

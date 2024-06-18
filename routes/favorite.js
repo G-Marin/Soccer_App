@@ -1,5 +1,5 @@
-import { removeFavoriteDB, addFavoriteDB, getFavoriteDB, getTeamIdDB} from "../database/database.js";
-import { removeFavoriteSQL, addFavoriteSQL, getFavoriteSQL, getTeamIdSQL} from "../utils/sql.js";
+import { removeFavoriteDB, addFavoriteDB, getFavoriteDB, getTeamIdDB, getTeamsDB} from "../database/database.js";
+import { removeFavoriteSQL, addFavoriteSQL, getFavoriteSQL, getTeamIdSQL, getTeamsSQL} from "../utils/sql.js";
 import express from 'express';
 
 const router = express.Router();
@@ -53,6 +53,20 @@ router.get('/id', async (req, res) => {
 
 });
 
+
+
+router.get('/teams', async (req, res) => {
+
+    const query = getTeamsSQL();
+
+    try {
+        const result = await getTeamsDB(query, []);
+        res.status(200).json(result);
+    } catch(err) {
+        res.status(500).json(err.message)
+    }
+
+});
 
 
 router.get('/', async (req, res) => {

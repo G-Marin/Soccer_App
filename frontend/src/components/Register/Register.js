@@ -2,13 +2,14 @@ import '../Login/Login.css';
 import React from 'react';
 import {Container, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import {useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
 
 	const navigate = useNavigate();
 
-	const [teams, SetTeams] = React.useState(["Barça", "Real Madrid", "Manchester United", "Liverpool", "Chelsea", "Arsenal", "Manchester City", "Tottenham Hotspur", "Bayern Munich", "Borussia Dortmund", "Paris Saint-Germain", "Juventus", "Inter Milan", "AC Milan", "Atletico Madrid", "Sevilla", "Valencia", "Villarreal", "Real Betis", "Real Sociedad", "Athletic Bilbao", "Leicester City", "West Ham United", "Everton", "Aston Villa", "Leeds United", "Wolverhampton Wanderers", "Crystal Palace", "Newcastle United", "Southampton", "Brighton & Hove Albion", "Burnley", "Fulham", "West Bromwich Albion", "Sheffield United"]);
+	const [teams, setTeams] = useState([]);
 
 	const [formData, setFormData] = React.useState({
 		username: '',
@@ -16,6 +17,23 @@ function Register() {
 		email: '',
 		team: '',
 	});
+
+	useEffect(() => {
+
+        const fetchTeams = async () => {
+            try {
+                const response = await axios.get('/favorite/teams', {
+                    params: {},
+                });
+
+                setTeams(response.data[0]);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchTeams();
+    }, []);
 
 
 	// Function to update state on input change

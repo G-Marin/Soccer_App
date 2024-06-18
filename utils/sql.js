@@ -49,15 +49,27 @@ function getTeamIdSQL() {
     return sql;
 }
 
+function getTeamsSQL() {
+    const sql = `SELECT team_name FROM public.teams`
+}
 
 
-function getNewsQuery (team) {
+
+function getNewsQuery () {
     
     let query = "https://newsapi.org/v2/everything";
 
     return query;
 }
 
+function duplicateUsernameSQL(){
 
 
-export { addUserSQL, addFavoriteSQL, removeFavoriteSQL, getFavoriteSQL, getNewsQuery, getUserSQL, getUserIdSQL, getTeamIdSQL};
+    let query = "SELECT username"
+
+    return query;
+}
+
+
+
+export { addUserSQL, addFavoriteSQL, removeFavoriteSQL, getFavoriteSQL, getNewsQuery, getUserSQL, getUserIdSQL, getTeamIdSQL, getTeamsSQL};

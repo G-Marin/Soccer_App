@@ -15,7 +15,7 @@ async function addUserDB(query, user_data) {
 }
 
 
-// Add a user to the database
+// Get user information from database
 async function getUserDB(query, username) {
 
     try{
@@ -77,7 +77,7 @@ async function getFavoriteDB(query, data) {
 }
 
 
-// Get favorite for user from the database
+// Get user_id corresponding to username
 async function getUserIdDB(query, data) {
     try{
 
@@ -92,7 +92,7 @@ async function getUserIdDB(query, data) {
 
 }
 
-// Get favorite for user from the database
+// Get team_id corresponding to team 
 async function getTeamIdDB(query, data) {
 
     try{
@@ -107,6 +107,25 @@ async function getTeamIdDB(query, data) {
 
 }
 
+// Get all teams
+async function getTeamsDB(query, data){
+
+    try {
+
+        const result = await pool.query(query, data);
+        return results;
+
+    }
+    catch (error){
+
+        console.error('Error fetching teams', error);
+        throw new Error("Error fetching teams")
+
+    }
+
+}
 
 
-export { addUserDB, addFavoriteDB, removeFavoriteDB, getFavoriteDB, getUserDB, getUserIdDB, getTeamIdDB} 
+
+
+export { addUserDB, addFavoriteDB, removeFavoriteDB, getFavoriteDB, getUserDB, getUserIdDB, getTeamIdDB, getTeamsDB} 

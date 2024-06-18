@@ -1,7 +1,6 @@
 import express from 'express';
-import { addUserSQL, getFavoriteSQL, getUserIdSQL } from '../utils/sql.js';
-import { addUserDB, getUserIdDB } from '../database/database.js';
-import { getFavoriteDB } from '../database/database.js';
+import { addUserSQL, getFavoriteSQL, getUserIdSQL, duplicateUserSQL} from '../utils/sql.js';
+import { addUserDB, getUserIdDB, getFavoriteDB, checkUsernameDB } from '../database/database.js';
 import { hashPassword, authenticateUser} from '../utils/authentication.js';
 
 
@@ -30,15 +29,27 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/add', async (req, res) => {
+
+
+    let query = duplicateUserSQL();
+    let user_data = Object.values(user);
+
+    try {
+        const result = await checkUsernameDB(query, user_data);
+    } catch{
+        res.status(500).json("That username already exist!");
+    }
+
     const user = req.body;
-    const query = addUserSQL(user);
+    query = addUserSQL(user);
+
 
     // Hash and salt user password
     const hashedPassword = await hashPassword(user.password);
  
     user.password = hashedPassword;
 
-    const user_data = Object.values(user);
+    user_data = Object.values(user);
 
     try {
         const result = await addUserDB(query, user_data);
@@ -46,6 +57,8 @@ router.post('/add', async (req, res) => {
     } catch(err) {
         res.status(500).json(err.message)
     }
+
+
 
 });
 
