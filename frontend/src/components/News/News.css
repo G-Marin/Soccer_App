@@ -1,61 +1,65 @@
 .article-container {
     display: flex;
-    flex-wrap: wrap; /* Allows wrapping to avoid cutting off articles */
-    justify-content: center;
-    margin-left:1000px;
-  }
-  
+    flex-wrap: wrap;
+    margin: auto;
+    padding: 1rem;
+    width: 100%;
+}
+
+.article {
+  margin: 0.5rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.news-title {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  font-weight: bold;
+  text-align: center;
+  min-height: 10%;
+}
+
+.news-description {
+  font-size: 1rem;
+}
+
+.news-image {
+  width: 100%;
+  margin-top: 1rem;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.news-source {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.news-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.news-button {
+  margin-top: 1rem;
+
+}
+
+@media (max-width: 768px) {
   .article {
-    flex: 0 0 calc(25% - 1rem); /* 4 articles per row with spacing */
-    margin: 0.5rem;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex: 0 0 calc(50% - 1rem);
   }
-  
-  .news-title {
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    font-weight: bold;
-    text-align: center;
-    min-height: 4rem; /* Adjust this height to fit the longest title you expect */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+}
 
-  .news-description{
-    font-size: 1rem;;
+@media (max-width: 576px) {
+  .article {
+    flex: 0 0 calc(100% - 1rem);
   }
-  
-  .news-image {
-    width: 100%;
-    height: 200px; /* Set a fixed height for the image container */
-    margin-top: 1rem;
-    overflow: hidden;
-    border-radius: 10px;
-  }
-
-  .news-source{
-    font-size: 1rem;
-    margin-top: 1rem;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .news-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .news-button {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-    width: 100%;
-  }
-  
+}

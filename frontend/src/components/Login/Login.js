@@ -8,6 +8,7 @@ import { AuthContext } from '../../utils/authcontext.js';
 function Login() {
 
 	const { isLoggedIn, login } = useContext(AuthContext);
+	const [error, setError] = useState('');
 
 	const [formData, setFormData] = useState({
 		username: '',
@@ -28,13 +29,18 @@ function Login() {
 	const handleSubmit = async (e) => {
 
 		e.preventDefault();
-		login(formData);
+
+		try{
+			await login(formData);
+		} catch (error) {
+			console.error('Error logging in:', error);
+			setError(error.message);
+		}
+		
 	};
 
 
 	return (
-
-	
 		<Container className = "login">
 
 			<div className="row" align = "center"> 
@@ -45,6 +51,7 @@ function Login() {
 
 				{isLoggedIn ? (<div className="text-white h4 mb-5">Successfully logged in!</div>) : ( <>
 	
+					{error && <div className="alert alert-danger">{error}</div>}
 					<form onSubmit={handleSubmit} className = "w-25 text-start">
 						<div className="form-group">
 							<label htmlFor="username" className="text-white">Username:

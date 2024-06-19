@@ -59,8 +59,11 @@ router.get('/teams', async (req, res) => {
 
     const query = getTeamsSQL();
 
+    console.log("Query: ", query)
+
     try {
-        const result = await getTeamsDB(query, []);
+        const result = await getTeamsDB(query);
+        console.log("Result: ", result)
         res.status(200).json(result);
     } catch(err) {
         res.status(500).json(err.message)

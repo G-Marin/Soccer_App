@@ -17,10 +17,13 @@ const authenticateUser = async (username, password) => {
     
     const query = getUserSQL();
 
-    let hash= await getUserDB(query, username);
+    let hash = await getUserDB(query, username);
 
     console.log("Hash:", hash)
-    console.log("Password:", password)
+
+    if(hash === undefined){
+        return false;
+    }
 
     const isMatch = await bcrypt.compare(password, hash.password);
     if (isMatch) {

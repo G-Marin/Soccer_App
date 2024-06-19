@@ -51,6 +51,7 @@ function getTeamIdSQL() {
 
 function getTeamsSQL() {
     const sql = `SELECT team_name FROM public.teams`
+    return sql;
 }
 
 

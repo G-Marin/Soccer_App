@@ -126,7 +126,7 @@ function Scores() {
 			<div className = "fixtures-box overflow-auto">
                 <div className="header-box p-5">
                     <div className="league-logo">
-                        <img src={`https://media.api-sports.io/football/leagues/${league}.png`} alt="League Logo" />
+                        <img src={`https://media.api-sports.io/football/leagues/${league.id}.png`} alt="League Logo" />
                     </div>
                 </div>
 	

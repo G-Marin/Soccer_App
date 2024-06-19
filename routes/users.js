@@ -1,6 +1,6 @@
 import express from 'express';
-import { addUserSQL, getFavoriteSQL, getUserIdSQL, duplicateUserSQL} from '../utils/sql.js';
-import { addUserDB, getUserIdDB, getFavoriteDB, checkUsernameDB } from '../database/database.js';
+import { addUserSQL, getFavoriteSQL, getUserIdSQL} from '../utils/sql.js';
+import { addUserDB, getUserIdDB, getFavoriteDB} from '../database/database.js';
 import { hashPassword, authenticateUser} from '../utils/authentication.js';
 
 
@@ -9,53 +9,52 @@ const router = express.Router();
 router.post('/login', async (req, res) => {
 
     const { username, password } = req.body;
-    
-    const authenticated = await authenticateUser(username, password);
 
-    const query = getFavoriteSQL();
-    const favoriteTeam = await getFavoriteDB(query, [username]);
+    try {
+   
+        const authenticated = await authenticateUser(username, password);
 
+        console.log("Authenticated: ", authenticated)
 
-    if (authenticated) {
-    
+        if (!authenticated) {
+
+            console.log("Invalid username or password")
+
+            res.status(401).json({message: "Invalid username or password"})
+        } else {
+
+        const query = getFavoriteSQL();
+        const favoriteTeam = await getFavoriteDB(query, [username]);
+        
         res.cookie('username', username, { httpOnly: false });
         res.cookie('favorite_team', favoriteTeam, { httpOnly: false });
-
         res.status(200).json();
 
-    } else {
-        res.status(401).json({ message: 'Invalid credentials' });
-    }
+        }
+    } catch(err) {
+        res.status(500).json({message: "Server error", error: err.message})
+    } 
+
 });
 
 router.post('/add', async (req, res) => {
 
-
-    let query = duplicateUserSQL();
-    let user_data = Object.values(user);
-
-    try {
-        const result = await checkUsernameDB(query, user_data);
-    } catch{
-        res.status(500).json("That username already exist!");
-    }
-
     const user = req.body;
-    query = addUserSQL(user);
+    const query = addUserSQL(user);
 
-
-    // Hash and salt user password
-    const hashedPassword = await hashPassword(user.password);
- 
-    user.password = hashedPassword;
-
-    user_data = Object.values(user);
 
     try {
+
+        // Hash and salt user password
+        const hashedPassword = await hashPassword(user.password);
+    
+        user.password = hashedPassword;
+        const user_data = Object.values(user);
         const result = await addUserDB(query, user_data);
         res.status(200).json(result);
+
     } catch(err) {
-        res.status(500).json(err.message)
+        res.status(500).json({ message: 'Error adding user', error: err.message })
     }
 
 
@@ -67,12 +66,11 @@ router.post('/remove', async  (req, res) => {
     const query = addUserSQL(user);
     const user_data = Object.values(user);
 
-
     try {
         const result = await addUserDB(query, user_data);
         res.status(200).json(result);
     } catch(err) {
-        res.status(500).json(err.message)
+        res.status(500).json({ message: 'Error removing user', err: err.message })
     }
 });
 
@@ -85,7 +83,7 @@ router.post('/update', async (req, res) => {
         const result = await addUserDB(query, user_data);
         res.status(200).json(result);
     } catch(err) {
-        res.status(500).json(err.message)
+        res.status(500).json({ message: 'Error updating user', err: err.message })
     }
 });
 
@@ -100,7 +98,7 @@ router.get('/id', async (req, res) => {
         console.log('Result: Here', result)
         res.status(200).json(result);
     } catch(err) {
-        res.status(500).json(err.message)
+        res.status(500).json({ message: 'Error getting user id', err: err.message })
     }
 });
 

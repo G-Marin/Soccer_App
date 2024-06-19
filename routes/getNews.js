@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
         return res.status(400).json({ message: 'No favorite team found in cookies' });
     }
     
-    const query = getNewsQuery()
+    const query = getNewsQuery();
 
     try {
         const response = await axios.get(query, {
@@ -35,8 +35,9 @@ router.get('/', async (req, res) => {
         let news = [];
         let article = {};
 
+
         
-        for(let i = 0; i < 10; i++) {
+        for(let i = 0; i < response.data.articles.length; i++) {
         
             article = {
                 "title": response.data.articles[i].title,

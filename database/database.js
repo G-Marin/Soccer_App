@@ -20,12 +20,11 @@ async function getUserDB(query, username) {
 
     try{
         const result = await pool.query(query, [username]);
-       
         return result.rows[0];
     }
 
     catch (error) {
-        console.error('User not found:', error), false;
+        return [error, "Error getting user"];
       }
 }
 
@@ -108,13 +107,22 @@ async function getTeamIdDB(query, data) {
 }
 
 // Get all teams
-async function getTeamsDB(query, data){
+async function getTeamsDB(query){
+
 
     try {
+        const result = await pool.query(query);
+        
 
-        const result = await pool.query(query, data);
-        return results;
+        const values = [];
 
+        for ( const [key, value] of Object.entries(result.rows)){
+            values.push(value.team_name);
+        }
+
+        console.log("Values: ", values)
+
+        return values;
     }
     catch (error){
 

@@ -26,7 +26,7 @@ function Register() {
                     params: {},
                 });
 
-                setTeams(response.data[0]);
+                setTeams(response.data);
             } catch (err) {
                 console.log(err);
             }
@@ -173,8 +173,8 @@ function Register() {
 
 								<option>Select your favorite team</option>
 
-								{teams.map((team, index) => (
-									<option key={index} value={team}>{team}</option>
+								{teams.map((team) => (
+									<option key={team} value={team}>{team}</option>
 								))}
 
 							</Form.Select>
