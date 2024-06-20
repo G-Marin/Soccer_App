@@ -1,8 +1,8 @@
-import "../Leagues/Leagues.css";
+import "./Content.css";
 import React from 'react';
 import { useState, useContext } from 'react';
 import {Container, Dropdown, FormControl, Button} from 'react-bootstrap';
-import { LeagueContext } from '../../utils/leaguecontext.js';
+import { LeagueContext } from '../../context/leaguecontext.js';
 
 
 const Selection = ({ 

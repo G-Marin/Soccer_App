@@ -1,8 +1,10 @@
-import "../Leagues/Leagues.css";
+import "./Content.css";
 import React from 'react';
 import { useState, useContext } from 'react';
-import {Container, Dropdown, FormControl, Button} from 'react-bootstrap';
-import { LeagueContext } from '../../utils/leaguecontext.js';
+import {Container} from 'react-bootstrap';
+import { LeagueContext } from '../../context/leaguecontext.js';
+import Selection from '../Content/Selection.js';
+import Content from '../Content/Content.js';
 
 
 const Page = ({type}) => {
@@ -12,6 +14,7 @@ const Page = ({type}) => {
     const [season, setSeason] = useState('2023');
     const {leaguesList} = useContext(LeagueContext);
     const [time, setTime] = useState('past');
+    const [expanded, setExpanded] = useState(false);
 
     
     const handleSearch = (e) => {
@@ -34,6 +37,14 @@ const Page = ({type}) => {
         setTime(time);
     };
 
+    useState(() => {
+        if(type === 'Livescore'){
+            setExpanded(true);
+        }
+    }, [type]);
+
+
+
     return (
 
         <Container className="mt-5">
@@ -42,7 +53,7 @@ const Page = ({type}) => {
 
 
             <Selection
-            expanded = {true}
+            expanded = {expanded}
             handleSearch = {handleSearch}
             searchQuery = {searchQuery}
             handleSeasonSelect = {handleSeasonSelect}
@@ -68,3 +79,5 @@ const Page = ({type}) => {
 
     );
 };
+
+export default Page;

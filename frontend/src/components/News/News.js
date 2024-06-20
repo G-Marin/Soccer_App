@@ -1,7 +1,7 @@
 import "./News.css"
 import React, { useEffect, useState, useContext } from 'react';
 import { Container, Button} from 'react-bootstrap';
-import { AuthContext } from "../../utils/authcontext";
+import { AuthContext } from "../../context/authcontext";
 
 import axios from 'axios';
 

@@ -1,9 +1,8 @@
-import "./Livescore.css";
+import "./Content.css";
 import axios from "axios";
-import React, { useEffect, useState, useContext} from 'react';
-import { Dropdown, Container, FormControl,Button} from 'react-bootstrap';
-import { LeagueContext } from '../../utils/leaguecontext.js';
-import Selection from '../Content/Selection.js';
+import React, { useEffect, useState} from 'react';
+import {Button} from 'react-bootstrap';
+
 
 const Content = ({
     type,
@@ -12,7 +11,7 @@ const Content = ({
     time,
 }) => {
 
-    const [cont, setCont] = useState([]);
+    const [content, setCont] = useState([]);
 
     useEffect(() => {
         const fetchContent = async () => {
@@ -20,21 +19,24 @@ const Content = ({
             let url = '';
             let params = {};
 
-            if(type === 'livescore'){
+            if(type === 'Livescore'){
                 url = '/api/fixtures';
                 params = {
                     league: league.id,
                     season: season,
                     time: time,
                 };
-            } else if (type === 'standings'){
+            } else if (type === 'League Standings'){
                 url = '/api/standings';
                 params = {
                     league: league.id,
                     season: season,
                 };
-            } else if (type === 'topscorers'){
-                url = '/api/topscorers';
+            } else if (type === 'Top Scorers'){
+
+                console.log("Top Scorers")
+
+                url = '/api/scorers';
                 params = {
                     league: league.id,
                     season: season,
@@ -46,13 +48,16 @@ const Content = ({
                     params: params,
                 });
 
+                console.log("Response: ", response.data)
                 setCont(response.data);
             } catch (err) {
                 console.log(err);
             }
   
         };
-    });
+
+        fetchContent();
+    }, [league, season, time, type]);
 
     return (
 
@@ -63,7 +68,7 @@ const Content = ({
                 </div>
             </div>
 
-            {type === 'livescore' && (
+            {type === 'Livescore' && (
                 <>
                     <div className="row p-3 fw-bold fixture-labels" align="center">
                         <div className="col-1">Home</div>
@@ -105,7 +110,7 @@ const Content = ({
                 </>
             )}
 
-            {type === 'standings' && (
+            {type === 'League Standings' && (
                 <div className="row p-3 fw-bold labels">
                     <div className="col-1">#</div>
                     <div className="col-1">Team</div>
@@ -121,7 +126,7 @@ const Content = ({
                 </div>
             )}
 
-            {type === 'standings' && content.map((rank, index) => (
+            {type === 'League Standings' && content.map((rank, index) => (
                 <div key={rank.team.id} className="row p-3 entry">
                     <div className="col-1 fw-bold">{index + 1}</div>
                     <div className="col-1 team-logo picture">
@@ -139,14 +144,14 @@ const Content = ({
                 </div>
             ))}
 
-            {type === 'topscorers' && content.map((scorer, index) => (
-                <div key={index} className="row h-25 p-3">
+            {type === 'Top Scorers' && content.map((scorer, index) => (
+                <div key={index} className="row p-3 player-entry">
                     <div className="col-2">
-                        <div className="picture">
+                        <div className="player-picture">
                             <img src={scorer.player.photo} alt={scorer.player.name} />
                         </div>
                     </div>
-                    <div className="col-2 player-name">
+                    <div className="col-2 player-stats">
                         <div className="text-black fw-bold">
                             {scorer.player.name}
                         </div>
@@ -156,7 +161,7 @@ const Content = ({
                             <div className="text-black">Assists: {scorer.statistics[0].goals.assists}</div>
                         </pre>
                     </div>
-                    <div className="col-2">
+                    <div className="col-2 player-stats">
                         <div className="text-black fw-bold">Attributes</div>
                         <pre>
                             <div className="text-black mt-4">Position: {scorer.statistics[0].games.position}</div>
@@ -164,7 +169,7 @@ const Content = ({
                             <div className="text-black">Weight: {scorer.player.weight}</div>
                         </pre>
                     </div>
-                    <div className="col-2">
+                    <div className="col-2 player-stats">
                         <div className="text-black fw-bold">Statistics</div>
                         <pre>
                             <div className="text-black mt-4">Appearances: {scorer.statistics[0].games.appearences}</div>

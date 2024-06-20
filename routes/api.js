@@ -30,8 +30,6 @@ router.get('/fixtures', async (req, res) => {
         params.last = 20;
     }
 
-    console.log("Fetching Fixtures")
-
     
     try {
         const response = await axios.get('https://v3.football.api-sports.io/fixtures', {
@@ -43,8 +41,7 @@ router.get('/fixtures', async (req, res) => {
             }
         });
 
-        console.log("Fixtures Fetched")
-
+        console.log(response.data.response)
         res.status(200).json(response.data.response);
     } catch (err) {
         res.status(500).json(err.message)
@@ -96,7 +93,7 @@ router.get('/standings', async (req, res) => {
             }
         });
         
-        res.status(200).json(response.data.response[0].league.standings);
+        res.status(200).json(response.data.response[0].league.standings[0]);
 
 
     } catch (err) {
@@ -124,8 +121,6 @@ router.get('/scorers', async (req, res) => {
             }
         });
 
-
-        console.log(response.data.response)
 
         res.status(200).json(response.data.response);
     } catch (err) {

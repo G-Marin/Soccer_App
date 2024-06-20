@@ -2,7 +2,7 @@ import './Login.css';
 import React from 'react';
 import { useContext, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { AuthContext } from '../../utils/authcontext.js';
+import { AuthContext } from '../../context/authcontext.js';
 
 
 function Login() {

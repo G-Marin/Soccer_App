@@ -1,0 +1,131 @@
+.fixtures-box{
+    background-color: rgb(255, 255, 255);
+    height: 1000px;
+    border-radius: 5px;
+    position:relative;
+    margin-bottom:1%;
+}
+
+.league-title{
+    padding-top:1%;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.fixture-labels{
+    background-color:rgba(250, 235, 215, 0.623);
+    color:rgb(0, 0, 0);
+}
+
+.fixture-teams img{
+    width: 80%;
+    height: 100%
+}
+
+.selection{
+    background-color: rgb(191, 203, 255);
+    border-radius: 5px;
+    padding: 1%;   
+}
+
+
+.selection button{
+    background-color: rgb(255, 255, 255);
+    color:black;
+    border-width: 0;
+}
+
+.dropdown-form img{
+    width: 5%;
+    height: 10%;
+}
+
+
+.standings-box{
+    background-color: rgb(255, 255, 255);
+    height: 1000px;
+    border-radius: 5px;
+    position:relative;
+    margin-bottom:1%;
+}
+
+.header-box{
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    height: 10%;
+    width: 100%;
+    top:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(191, 203, 255);
+}
+
+.league-logo img{
+    width: 30%;
+    height: 100%;
+    padding:5px; 
+}
+
+.league-logo{
+    width: 20%;
+    border-radius: 10px;
+    border-width: 3px;
+    border-style: solid;
+    border-color:rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+}
+
+.team-logo img{
+    width: 80%;
+    height: 100%; 
+}
+
+.labels{
+    background-color:rgba(250, 235, 215, 0.623);
+}
+
+.entry{
+    background-color:rgba(250, 235, 215, 0.623);
+    border-width: 1px;
+    font-weight: bold;
+}
+
+#dropdown-basic{
+    height:60px;
+}
+
+.dropdown-form img{
+    width: 5%;
+    height: 10%;
+}
+
+.picture {
+    width: 95%;
+    height: 95%;
+}
+
+.team img{
+    width: 80%;
+    height: 80%;
+}
+
+.flag img{
+    width: 80%;
+    height: 60%;
+}
+
+.player-picture img{
+    width: 80%;
+    height: 80%;
+}
+
+.player-entry{
+    height: 20% !important;
+}
+
+.player-stats{
+    font-size:50%;
+}
