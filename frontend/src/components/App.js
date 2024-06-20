@@ -16,7 +16,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/scorers" element={<Scores />} />
+        <Route path="/scorers" element={<Page type = {"scorers"}/>} />
         <Route path="/standings" element={<Leagues />} />
         <Route path="/live" element={<Scoreboard />} />
         <Route path="/login" element = {<Login />} />

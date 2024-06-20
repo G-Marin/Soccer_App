@@ -5,33 +5,17 @@ import {Container, Dropdown, FormControl, Button} from 'react-bootstrap';
 import { LeagueContext } from '../../utils/leaguecontext.js';
 
 
-const Selection = ({expanded}) => {
-
-    const [searchQuery, setSearchQuery] = useState('');
-    const [league, setLeague] = useState({id: 140, name: 'La Liga'});
-    const [season, setSeason] = useState('2023');
-    const {leaguesList} = useContext(LeagueContext);
-    const [time, setTime] = useState('past');
-
-    const handleSearch = (e) => {
-        setSearchQuery(e.target.value);
-    };
-
-    const handleSeasonSelect = (season) => {
-        setSeason(season);
-    };
-
-    const handleLeagueSelect = (league) => {
-        setLeague({id: league.id, name: league.name});
-    };
-
-    const filteredLeagues = leaguesList.filter((league) =>
-        league.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    const handleTime = (time) => {
-        setTime(time);
-    };
+const Selection = ({ 
+    expanded,
+    handleSearch,
+    searchQuery,
+    handleSeasonSelect,
+    handleLeagueSelect,
+    filteredLeagues,
+    handleTime,
+    league,
+    season
+}) => {
 
     return (
 
