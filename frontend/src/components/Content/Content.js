@@ -61,7 +61,7 @@ const Content = ({
 
     return (
 
-        <div className = "fixtures-box overflow-auto">		
+        <div className = "fixtures-box overflow-auto mb-5">		
             <div className="header-box p-5">
                 <div className="league-logo">
                     <img src={`https://media.api-sports.io/football/leagues/${league.id}.png`} alt="League Logo" />
@@ -78,8 +78,7 @@ const Content = ({
                         <div className="col-2">Date</div>
                         <div className="col-2">Stadium</div>
                         <div className="col-2">Referee</div>
-                        <div className="col-1">Status</div>
-                        <div className="col-1">Statistics</div>
+                        <div className="col-1">Status</div>                      
                     </div>
 
                     {content.map((match) => (
@@ -99,12 +98,7 @@ const Content = ({
                             <div className="col-2">{match.fixture.date}</div>
                             <div className="col-2">{match.fixture.venue.name}</div>
                             <div className="col-2">{match.fixture.referee}</div>
-                            <div className="col-1">{match.fixture.status.short}</div>
-                            <div className="col-1">
-                                <Button variant="success" size="sm">
-                                    Stats
-                                </Button>
-                            </div>
+                            <div className="col-1">{match.fixture.status.short}</div>                         
                         </div>
                     ))}
                 </>

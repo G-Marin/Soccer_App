@@ -1,9 +1,8 @@
 .fixtures-box{
     background-color: rgb(255, 255, 255);
-    height: 1000px;
+    height: 70vh;
     border-radius: 5px;
     position:relative;
-    margin-bottom:1%;
 }
 
 .league-title{
@@ -30,7 +29,6 @@
 
 
 .selection button{
-    background-color: rgb(255, 255, 255);
     color:black;
     border-width: 0;
 }
@@ -120,12 +118,4 @@
 .player-picture img{
     width: 80%;
     height: 80%;
-}
-
-.player-entry{
-    height: 20% !important;
-}
-
-.player-stats{
-    font-size:50%;
 }

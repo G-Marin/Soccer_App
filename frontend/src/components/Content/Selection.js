@@ -1,9 +1,6 @@
 import "./Content.css";
 import React from 'react';
-import { useState, useContext } from 'react';
-import {Container, Dropdown, FormControl, Button} from 'react-bootstrap';
-import { LeagueContext } from '../../context/leaguecontext.js';
-
+import { Dropdown, FormControl, Button, ButtonGroup } from 'react-bootstrap';
 
 const Selection = ({ 
     expanded,
@@ -13,9 +10,11 @@ const Selection = ({
     handleLeagueSelect,
     filteredLeagues,
     handleTime,
+    time,
     league,
-    season
+    season,
 }) => {
+
 
     return (
 
@@ -23,37 +22,50 @@ const Selection = ({
             <div className = "row selection">
 
                 {expanded ? (<>
-                    <div className = "col-1">
+                   
+                        <div className = "col-1">
+                        <Button 
+                        className = "w-100 h-100" 
+                        variant={time === 'current' ? "success" : "light"}
+                        onClick={() => handleTime("current")}
+                        >
+                            Today 
+                            
+                        </Button>
 
-                    <Button className = "w-100 h-100" variant="primary" onClick={() => handleTime("current")}>
-                        Today
-                    </Button>
+                        </div>
 
-                    </div>
+                        <div className = "col-2">
 
-                    <div className = "col-2">
+                        <Button 
+                        className = "w-100 h-100"  
+                        variant={time === 'scheduled' ? "success" : "light"}
+                        onClick={() => handleTime("scheduled")}
+                        checked = {time === 'scheduled'}>
 
-                    <Button className = "w-100 h-100"  variant="success" onClick={() => handleTime("scheduled")}>
-                    Upcoming
-                    </Button>
+                        Upcoming
+                        </Button>
 
-                    </div>
+                        </div>
 
-                    <div className = "col-1 ">
+                        <div className = "col-1 ">
 
 
-                    <Button className = "w-100 h-100" variant="dark" onClick={() => handleTime("past")}>
-                    Past 
-                    </Button>
+                        <Button 
+                        className = "w-100 h-100" 
+                        variant={time === 'past' ? "success" : "light"}
+                        onClick={() => handleTime("past")}
+                        checked = {time === 'scheduled'}>
+                        Past 
+                        </Button>
 
-                    </div>
-                    
+                        </div>                       
                 </>) : (<> </>)}
 
 
                 <div className = "col-2">
                     <Dropdown  size = "sm">
-                        <Dropdown.Toggle variant="primary" id="dropdown-basic" className = "w-100">
+                        <Dropdown.Toggle variant="light" id="dropdown-basic" className = "w-100">
 
                         {season}
                     
@@ -82,7 +94,7 @@ const Selection = ({
 
                 <div className = "col dropdown-form">
                 <Dropdown className="white" size="sm">
-                            <Dropdown.Toggle variant="warning" id="dropdown-basic" className="w-100">
+                            <Dropdown.Toggle variant="light" id="dropdown-basic" className="w-100">
                                 {league.name}
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="w-100">

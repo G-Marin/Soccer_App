@@ -47,7 +47,7 @@ const Page = ({type}) => {
 
     return (
 
-        <Container className="mt-5">
+        <Container >
 
             <h1 className = "text-center text-white mt-5 mb-5"> {type}</h1>
 
