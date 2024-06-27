@@ -1,9 +1,10 @@
 .fixtures-box{
     background-color: rgb(255, 255, 255);
-    height: 70vh;
     border-radius: 5px;
     position:relative;
+    height: 70vh;
 }
+
 
 .league-title{
     padding-top:1%;

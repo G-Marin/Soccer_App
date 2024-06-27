@@ -5,14 +5,14 @@ import {Container} from 'react-bootstrap';
 
 function Footer() {
   return (
-    <div className="Footer">
+    <div className="footer">
       
 
-      <Container>
 
-      <a href = "https://www.linkedin.com/in/gabriel-marin-/" className = "text-center text-white footer mb-3">Made by Gabriel Marin </a>
+
+      <a href = "https://www.linkedin.com/in/gabriel-marin-/" className = "text-center text-white footer mb-3"> Made by Gabriel Marin </a>
       
-      </Container>
+
   
 
 
