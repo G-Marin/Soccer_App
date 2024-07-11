@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './Header/Header.js';
 import Home from './Home/Home.js';
 import Footer from './Footer/Footer.js';
@@ -22,7 +22,7 @@ function App() {
             <Route path="/register" element = {<Register />} />
             <Route path="/news" element={<News />} />
         </Routes>
-        <Footer />
+        {location.pathname === '/' && <Footer />}
         </BrowserRouter>
     );
 }
