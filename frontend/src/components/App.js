@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './Header/Header.js';
 import Home from './Home/Home.js';
 import Footer from './Footer/Footer.js';
@@ -10,7 +10,6 @@ import News from './News/News.js';
 
 
 function App() {
-    const currentLocation = useLocation();
     return (
         <BrowserRouter>
         <Header />
@@ -23,7 +22,7 @@ function App() {
             <Route path="/register" element = {<Register />} />
             <Route path="/news" element={<News />} />
         </Routes>
-        {currentLocation.pathname === '/' && <Footer />}
+        <Footer />
         </BrowserRouter>
     );
 }
