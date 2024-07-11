@@ -6,7 +6,7 @@ import Footer from './Footer/Footer.js';
 import Page from './Content/Page.js';
 import Login from './Login/Login.js';
 import Register from './Register/Register.js';
-import News from './News/News.js';
+import News from './News/News/News.js';
 
 
 function App() {
