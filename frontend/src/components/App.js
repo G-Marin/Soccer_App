@@ -10,6 +10,7 @@ import News from './News/News.js';
 
 
 function App() {
+    currentLocation = useLocation();
     return (
         <BrowserRouter>
         <Header />
@@ -22,7 +23,7 @@ function App() {
             <Route path="/register" element = {<Register />} />
             <Route path="/news" element={<News />} />
         </Routes>
-        {location.pathname === '/' && <Footer />}
+        {currentLocation.pathname === '/' && <Footer />}
         </BrowserRouter>
     );
 }
