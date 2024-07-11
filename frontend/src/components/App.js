@@ -10,7 +10,7 @@ import News from './News/News.js';
 
 
 function App() {
-    currentLocation = useLocation();
+    const currentLocation = useLocation();
     return (
         <BrowserRouter>
         <Header />
