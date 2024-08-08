@@ -14,6 +14,5 @@ root.render(
                 <App />
             </AuthProvider>
         </LeagueProvider>
-  </React.StrictMode>
+    </React.StrictMode>
 );
-

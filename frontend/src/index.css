@@ -1,8 +1,6 @@
 body {
-    background: linear-gradient(to top,  #160075, rgb(156, 0, 0) 65%)   no-repeat center center fixed;
+    background: linear-gradient(to top, #160075, rgb(156, 0, 0) 65%) no-repeat
+        center center fixed;
     background-size: cover;
     background-position: center;
-    
 }
-
-

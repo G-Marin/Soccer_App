@@ -7,57 +7,52 @@ const router = express.Router();
 dotenv.config();
 
 router.get('/', async (req, res) => {
-
-    console.log("Getting news")
+    console.log('Getting news');
 
     const team = req.cookies.favorite_team.team_name;
 
-    console.log("Team: ", team)
+    console.log('Team: ', team);
 
     if (!team) {
-        return res.status(400).json({ message: 'No favorite team found in cookies' });
+        return res
+            .status(400)
+            .json({ message: 'No favorite team found in cookies' });
     }
-    
+
     const query = getNewsQuery();
 
     try {
         const response = await axios.get(query, {
             params: {
-                "apiKey": process.env.NEWS_API_KEY,
-                "sortBy": "publishedAt",
-                "sources": "espn",
-                "searchIn": "title",
-                "q": team
+                apiKey: process.env.NEWS_API_KEY,
+                sortBy: 'publishedAt',
+                sources: 'espn',
+                searchIn: 'title',
+                q: team,
             },
-            headers: {}
+            headers: {},
         });
-        
+
         let news = [];
         let article = {};
 
-
-        
-        for(let i = 0; i < response.data.articles.length; i++) {
-        
+        for (let i = 0; i < response.data.articles.length; i++) {
             article = {
-                "title": response.data.articles[i].title,
-                "description": response.data.articles[i].description,
-                "url": response.data.articles[i].url,
-                "urlToImage": response.data.articles[i].urlToImage,
-                "source": response.data.articles[i].source
-            }
+                title: response.data.articles[i].title,
+                description: response.data.articles[i].description,
+                url: response.data.articles[i].url,
+                urlToImage: response.data.articles[i].urlToImage,
+                source: response.data.articles[i].source,
+            };
             news.push(article);
         }
 
-        console.log(news)
+        console.log(news);
 
         res.status(200).json(news);
-       
-    }   catch (err) {
+    } catch (err) {
         console.error('Error getting data:', error);
     }
-
 });
 
 export default router;
-
